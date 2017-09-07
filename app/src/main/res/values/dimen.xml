@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Generic dimensions -->
+    <dimen name="default_large_margin">32dp</dimen>
+    <dimen name="default_medium_margin">16dp</dimen>
+    <dimen name="default_small_margin">8dp</dimen>
+</resources>

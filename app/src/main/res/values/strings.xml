@@ -1,3 +1,18 @@
 <resources>
+    <!-- Misc -->
     <string name="app_name">Quest</string>
+
+    <!-- Generic -->
+    <string name="generic_login">Login</string>
+    <string name="generic_register">Register</string>
+
+    <!-- Login -->
+    <string name="login_label">Login</string>
+    <string name="login_login">Login</string>
+    <string name="login_password">Password</string>
+    <string name="login_forgot_password">Forgot your password?</string>
+    <string name="login_no_account_button">Don\'t have an account? Sign Up!</string>
+
+    <!-- Register -->
+    <string name="register_label">Register</string>
 </resources>

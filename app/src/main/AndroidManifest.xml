@@ -10,14 +10,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Main Activity -->
-        <activity android:name=".MainActivity">
+        <!-- Onboarding -->
+        <activity android:name=".account.OnboardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Main Activity -->
+        <activity android:name=".main.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <!-- Login -->
+        <activity android:name=".account.LoginActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/login_label"
+            android:parentActivityName=".account.OnboardingActivity"/>
+
+        <!-- Register -->
+        <activity android:name=".account.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/register_label"
+            android:parentActivityName=".account.OnboardingActivity"/>
+
+        <!-- Settings -->
+        <activity android:name=".settings.SettingsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

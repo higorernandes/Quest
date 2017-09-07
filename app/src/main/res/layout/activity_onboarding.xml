@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="loremipsumvirtualenterprise.quest.account.OnboardingActivity">
+
+    <!-- Main content -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/onboardingRegisterButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/generic_register"
+            android:layout_marginStart="@dimen/default_large_margin"
+            android:layout_marginEnd="@dimen/default_medium_margin"
+            android:textColor="@color/colorPrimary"
+            style="?attr/buttonBarButtonStyle"/>
+
+        <!-- Register Button -->
+        <Button
+            android:id="@+id/onboardingLoginButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_medium_margin"
+            android:layout_marginEnd="@dimen/default_large_margin"
+            android:layout_weight="1"
+            android:text="@string/generic_login"
+            android:textColor="@color/colorPrimary"
+            style="?attr/buttonBarButtonStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="loremipsumvirtualenterprise.quest.account.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/default_large_margin"
+        android:layout_marginEnd="@dimen/default_large_margin"
+        android:layout_marginTop="@dimen/default_large_margin"
+        android:layout_marginBottom="@dimen/default_large_margin">
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_medium_margin"
+            android:src="@drawable/ic_quest"
+            android:layout_gravity="center"/>
+
+        <!-- Login field -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/loginLoginTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_small_margin">
+
+            <EditText
+                android:id="@+id/loginLoginEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_login"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Password field -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/loginPasswordTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/loginPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/login_password"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Forgot password Button -->
+        <Button
+            android:id="@+id/loginForgotPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/default_medium_margin"
+            android:text="@string/login_forgot_password"
+            android:textColor="@color/colorPrimary"
+            android:textAllCaps="false"
+            style="?attr/buttonBarButtonStyle"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/loginLoginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/generic_login"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="@dimen/default_medium_margin"
+            style="?attr/buttonBarButtonStyle"/>
+
+        <!-- "Don't have an account?" Button -->
+        <Button
+            android:id="@+id/loginNoAccountButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/login_no_account_button"
+            android:textColor="@color/colorPrimary"
+            android:textAllCaps="false"
+            style="?attr/buttonBarButtonStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>
