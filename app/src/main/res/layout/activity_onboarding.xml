@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context="loremipsumvirtualenterprise.quest.account.OnboardingActivity">
 
     <!-- Main content -->
@@ -13,36 +14,38 @@
         android:layout_height="0dp"
         android:layout_weight="9">
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/onboardingViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_above="@id/onboardingDotsLinearLayout"
+            android:overScrollMode="never"/>
+
+        <LinearLayout
+            android:id="@+id/onboardingDotsLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_medium_margin"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"/>
+
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom">
 
         <!-- Login Button -->
         <Button
-            android:id="@+id/onboardingRegisterButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/generic_register"
-            android:layout_marginStart="@dimen/default_large_margin"
-            android:layout_marginEnd="@dimen/default_medium_margin"
-            android:textColor="@color/colorPrimary"
-            style="?attr/buttonBarButtonStyle"/>
-
-        <!-- Register Button -->
-        <Button
             android:id="@+id/onboardingLoginButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_medium_margin"
-            android:layout_marginEnd="@dimen/default_large_margin"
             android:layout_weight="1"
-            android:text="@string/generic_login"
-            android:textColor="@color/colorPrimary"
-            style="?attr/buttonBarButtonStyle"/>
+            android:text="@string/onboarding_start"
+            style="@style/BottomButtonTheme"/>
 
     </LinearLayout>
 

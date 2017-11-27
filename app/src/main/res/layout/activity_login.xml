@@ -5,38 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context="loremipsumvirtualenterprise.quest.account.LoginActivity">
+
+    <!-- Toolbar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:visibility="visible"
+        app:elevation="0dp">
+
+        <include
+            android:id="@+id/mainToolbar"
+            layout="@layout/toolbar_login"
+            android:elevation="7dp" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-        android:orientation="vertical"
-        android:layout_marginStart="@dimen/default_large_margin"
+        android:layout_marginBottom="@dimen/default_medium_margin"
         android:layout_marginEnd="@dimen/default_large_margin"
-        android:layout_marginTop="@dimen/default_large_margin"
-        android:layout_marginBottom="@dimen/default_large_margin">
+        android:layout_marginStart="@dimen/default_large_margin"
+        android:layout_weight="4"
+        android:orientation="vertical">
 
         <!-- Logo -->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/default_large_margin"
             android:layout_marginTop="@dimen/default_medium_margin"
-            android:src="@drawable/ic_quest"
-            android:layout_gravity="center"/>
+            android:src="@drawable/ic_quest" />
 
         <!-- Login field -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/loginLoginTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_small_margin">
+            android:layout_marginTop="@dimen/default_medium_margin"
+            android:theme="@style/WhiteTextInputLayout">
 
             <EditText
                 android:id="@+id/loginLoginEditText"
+                style="@style/WhiteEditTextTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/login_login"/>
+                android:hint="@string/login_login"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:theme="@style/WhiteEditTextTheme" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -44,14 +67,19 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/loginPasswordTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_medium_margin"
+            android:theme="@style/WhiteTextInputLayout">
 
             <EditText
                 android:id="@+id/loginPasswordEditText"
+                style="@style/WhiteEditTextTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="@string/login_password"/>
+                android:hint="@string/login_password"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:theme="@style/WhiteEditTextTheme" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -61,11 +89,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="@dimen/default_medium_margin"
+            android:layout_marginEnd="-16dp"
+            android:layout_marginTop="@dimen/default_small_margin"
+            android:background="@android:color/transparent"
             android:text="@string/login_forgot_password"
-            android:textColor="@color/colorPrimary"
-            android:textAllCaps="false"
-            style="?attr/buttonBarButtonStyle"/>
+            android:theme="@style/SecondaryButtonTheme" />
 
     </LinearLayout>
 
@@ -73,18 +101,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:layout_marginStart="@dimen/default_medium_margin"
+        android:layout_marginEnd="@dimen/default_medium_margin"
         android:layout_weight="2">
 
         <!-- Login Button -->
         <Button
             android:id="@+id/loginLoginButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:text="@string/generic_login"
+            android:layout_marginStart="@dimen/default_medium_margin"
+            android:layout_marginEnd="@dimen/default_medium_margin"
             android:layout_gravity="center"
-            android:textColor="@color/colorPrimary"
             android:layout_marginBottom="@dimen/default_medium_margin"
-            style="?attr/buttonBarButtonStyle"/>
+            style="@style/PrimaryButtonTheme"/>
 
         <!-- "Don't have an account?" Button -->
         <Button
@@ -93,9 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/login_no_account_button"
-            android:textColor="@color/colorPrimary"
-            android:textAllCaps="false"
-            style="?attr/buttonBarButtonStyle"/>
+            style="@style/SecondaryButtonTheme"/>
 
     </LinearLayout>
 

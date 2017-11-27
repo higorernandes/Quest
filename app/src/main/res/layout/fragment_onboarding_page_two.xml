@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_centerInParent="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/image_default_size"
+            android:layout_height="@dimen/image_default_size"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/default_medium_margin"
+            android:layout_marginTop="@dimen/default_large_margin"
+            android:src="@drawable/ic_no_movies"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/default_medium_margin"
+            android:layout_marginEnd="@dimen/default_large_margin"
+            android:layout_marginStart="@dimen/default_large_margin"
+            android:fontFamily="@font/avenir_next_demi"
+            android:text="@string/onboarding_title_page_two"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/default_medium_margin"
+            android:layout_marginEnd="@dimen/default_large_margin"
+            android:layout_marginStart="@dimen/default_large_margin"
+            android:fontFamily="@font/avenir_next_regular"
+            android:text="@string/onboarding_text_page_two"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/font_size_default" />
+
+    </LinearLayout>
+
+</LinearLayout>

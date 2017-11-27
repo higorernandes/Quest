@@ -4,4 +4,17 @@
     <dimen name="default_large_margin">32dp</dimen>
     <dimen name="default_medium_margin">16dp</dimen>
     <dimen name="default_small_margin">8dp</dimen>
+
+    <!-- Font sizes -->
+    <dimen name="font_size_extra_small">10dp</dimen>
+    <dimen name="font_size_default">14dp</dimen>
+    <dimen name="font_size_large">18dp</dimen>
+
+    <!-- Buttons -->
+    <dimen name="button_default_height">60dp</dimen>
+    <dimen name="button_bottom_height">70dp</dimen>
+
+    <!-- Images -->
+    <dimen name="image_default_size">200dp</dimen>
+
 </resources>

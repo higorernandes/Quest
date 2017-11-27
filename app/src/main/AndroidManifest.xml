@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
 
         <!-- Onboarding -->
-        <activity android:name=".account.OnboardingActivity">
+        <activity android:name=".account.OnboardingActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,6 +21,7 @@
 
         <!-- Main Activity -->
         <activity android:name=".main.MainActivity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
 
         <!-- Login -->

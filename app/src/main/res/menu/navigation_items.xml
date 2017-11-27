@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_home"
+        android:enabled="true"
+        android:title="@string/main_home_bottombar_text"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_trending"
+        android:enabled="true"
+        android:title="@string/main_trending_bottombar_text"
+        android:icon="@drawable/ic_trending"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_board"
+        android:title="@string/main_board_bottombar_text"
+        android:icon="@drawable/ic_board"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_notifications"
+        android:title="@string/main_notifications_bottombar_text"
+        android:icon="@drawable/ic_notifications"
+        app:showAsAction="ifRoom"/>
+</menu>
