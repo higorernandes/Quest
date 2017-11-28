@@ -18,4 +18,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainBoardRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/cardview_small_margin"
+        android:layout_marginBottom="@dimen/cardview_default_margin"
+        android:overScrollMode="never"
+        android:layout_below="@+id/appBarLayout"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="30dp"/>
+
 </RelativeLayout>

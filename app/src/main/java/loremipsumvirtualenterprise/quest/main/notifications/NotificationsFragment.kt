@@ -2,6 +2,7 @@ package loremipsumvirtualenterprise.quest.main.notifications
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,8 @@ class NotificationsFragment : MainGenericFragment()
 
     private fun setUpToolbar() {
         mainToolbarTitleTextView.text = resources.getString(R.string.main_notifications_bottombar_text)
+        mainToolbarActionIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_settings))
+        mainToolbarActionButton.visibility = View.VISIBLE
     }
 
     //endregion

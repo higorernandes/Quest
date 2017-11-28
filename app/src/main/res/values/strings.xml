@@ -27,8 +27,10 @@
 
     <!-- Main -->
     <string name="main_home_bottombar_text">Home</string>
-    <string name="main_trending_bottombar_text">Trending</string>
+    <string name="main_chat_bottombar_text">Chat</string>
     <string name="main_board_bottombar_text">Board</string>
     <string name="main_notifications_bottombar_text">Notificações</string>
+
+    <string name="placeholder">\@will_byers</string>
 
 </resources>

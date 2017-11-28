@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import loremipsumvirtualenterprise.quest.main.board.BoardFragment
 import loremipsumvirtualenterprise.quest.main.home.HomeFragment
 import loremipsumvirtualenterprise.quest.main.notifications.NotificationsFragment
-import loremipsumvirtualenterprise.quest.main.trending.TrendingFragment
+import loremipsumvirtualenterprise.quest.main.chat.ChatFragment
 import android.text.SpannableStringBuilder
 import loremipsumvirtualenterprise.quest.util.CustomTypefaceSpan
 import android.support.v4.content.res.ResourcesCompat
@@ -69,15 +69,15 @@ class MainActivity : AppCompatActivity()
 
         mainBottomBar.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_home -> setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_HOME)
-                R.id.action_trending -> setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_TRENDING)
                 R.id.action_board -> setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_BOARD)
+                R.id.action_home -> setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_HOME)
+                R.id.action_chat -> setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_CHAT)
                 R.id.action_notifications -> setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_NOTIFICATIONS)
             }
             true
         }
 
-        setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_HOME)
+        setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_BOARD)
     }
 
     private fun setCurrentFragment(fragmentType: MainFragmentTabsManager.MainFragmentType) {
@@ -102,9 +102,9 @@ class MainActivity : AppCompatActivity()
                 for (i in 0 until currentFragmentsCount) {
                     val existentFragment = fragmentManager.fragments[i]
                     if (existentFragment != null) {
-                        if (existentFragment is HomeFragment ||
-                                existentFragment is TrendingFragment ||
-                                existentFragment is BoardFragment ||
+                        if (existentFragment is BoardFragment ||
+                                existentFragment is HomeFragment ||
+                                existentFragment is ChatFragment ||
                                 existentFragment is NotificationsFragment) {
                             fragmentTransaction.hide(existentFragment)
                         }

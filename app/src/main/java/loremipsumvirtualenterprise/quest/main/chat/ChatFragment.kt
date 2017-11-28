@@ -1,4 +1,4 @@
-package loremipsumvirtualenterprise.quest.main.trending
+package loremipsumvirtualenterprise.quest.main.chat
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,7 @@ import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
 /**
  * Created by root on 2017-11-26.
  */
-class TrendingFragment : MainGenericFragment()
+class ChatFragment : MainGenericFragment()
 {
     //region Attributes
 
@@ -23,8 +23,8 @@ class TrendingFragment : MainGenericFragment()
     //region Companion Object
 
     companion object {
-        fun newInstance(): TrendingFragment {
-            val fragment = TrendingFragment()
+        fun newInstance(): ChatFragment {
+            val fragment = ChatFragment()
             val args = Bundle()
             fragment.arguments = args
             return fragment
@@ -37,7 +37,7 @@ class TrendingFragment : MainGenericFragment()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mContext = container?.context
-        return inflater?.inflate(R.layout.fragment_main_trending, container, false)
+        return inflater?.inflate(R.layout.fragment_main_chat, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class TrendingFragment : MainGenericFragment()
     //region Private Methods
 
     private fun setUpToolbar() {
-        mainToolbarTitleTextView.text = resources.getString(R.string.main_trending_bottombar_text)
+        mainToolbarTitleTextView.text = resources.getString(R.string.main_chat_bottombar_text)
     }
 
     //endregion

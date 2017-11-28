@@ -13,8 +13,17 @@
     <!-- Buttons -->
     <dimen name="button_default_height">60dp</dimen>
     <dimen name="button_bottom_height">70dp</dimen>
+    <dimen name="button_small_height">30dp</dimen>
 
     <!-- Images -->
     <dimen name="image_default_size">200dp</dimen>
+
+    <!-- Card -->
+    <dimen name="cardview_large_margin">20dp</dimen>
+    <dimen name="cardview_default_margin">10dp</dimen>
+    <dimen name="cardview_small_margin">5dp</dimen>
+
+    <!-- Misc -->
+    <dimen name="divider_height">1dp</dimen>
 
 </resources>

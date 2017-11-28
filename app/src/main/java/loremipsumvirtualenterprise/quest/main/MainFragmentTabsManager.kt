@@ -2,24 +2,21 @@ package loremipsumvirtualenterprise.quest.main
 
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
 import loremipsumvirtualenterprise.quest.main.board.BoardFragment
+import loremipsumvirtualenterprise.quest.main.chat.ChatFragment
 import loremipsumvirtualenterprise.quest.main.home.HomeFragment
 import loremipsumvirtualenterprise.quest.main.notifications.NotificationsFragment
-import loremipsumvirtualenterprise.quest.main.trending.TrendingFragment
 
 /**
  * Created by root on 2017-11-26.
  */
 class MainFragmentTabsManager
 {
-
-    private var mHomeFragment: HomeFragment? = null
-    private var mTrendingFragment: TrendingFragment? = null
     private var mBoardFragment: BoardFragment? = null
+    private var mHomeFragment: HomeFragment? = null
+    private var mChatFragment: ChatFragment? = null
     private var mNotificationsFragment: NotificationsFragment? = null
 
     private var mCurrentSelectedFragment: MainGenericFragment? = null
-
-
 
     companion object {
         private var mInstance: MainFragmentTabsManager? = null
@@ -40,6 +37,14 @@ class MainFragmentTabsManager
         return mCurrentSelectedFragment
     }
 
+    private fun getBoardFragment(): BoardFragment {
+        if (mBoardFragment == null) {
+            mBoardFragment = BoardFragment.newInstance()
+            mBoardFragment!!.retainInstance = true
+        }
+        return mBoardFragment as BoardFragment
+    }
+
     private fun getHomeFragment(): HomeFragment {
         if (mHomeFragment == null) {
             mHomeFragment = HomeFragment.newInstance()
@@ -48,20 +53,12 @@ class MainFragmentTabsManager
         return mHomeFragment as HomeFragment
     }
 
-    private fun getTrendingFragment(): TrendingFragment {
-        if (mTrendingFragment == null) {
-            mTrendingFragment = TrendingFragment.newInstance()
-            mTrendingFragment!!.retainInstance = true
+    private fun getChatFragment(): ChatFragment {
+        if (mChatFragment == null) {
+            mChatFragment = ChatFragment.newInstance()
+            mChatFragment!!.retainInstance = true
         }
-        return mTrendingFragment as TrendingFragment
-    }
-
-    private fun getBoardFragment(): BoardFragment {
-        if (mBoardFragment == null) {
-            mBoardFragment = BoardFragment.newInstance()
-            mBoardFragment!!.retainInstance = true
-        }
-        return mBoardFragment as BoardFragment
+        return mChatFragment as ChatFragment
     }
 
     private fun getNotificationsFragment(): NotificationsFragment {
@@ -74,35 +71,35 @@ class MainFragmentTabsManager
 
     fun verifyFragmentInstantiatedByType(fragmentType: MainFragmentType): Boolean? {
         return when (fragmentType) {
-            MainFragmentType.FRAGMENT_HOME -> mHomeFragment != null
-            MainFragmentType.FRAGMENT_TRENDING -> mTrendingFragment != null
             MainFragmentType.FRAGMENT_BOARD -> mBoardFragment != null
+            MainFragmentType.FRAGMENT_HOME -> mHomeFragment != null
+            MainFragmentType.FRAGMENT_CHAT -> mChatFragment != null
             MainFragmentType.FRAGMENT_NOTIFICATIONS -> mNotificationsFragment != null
         }
     }
 
     fun getMainFragmentByType(fragmentType: MainFragmentType): MainGenericFragment? {
         return when (fragmentType) {
-            MainFragmentType.FRAGMENT_HOME -> getHomeFragment()
-            MainFragmentType.FRAGMENT_TRENDING -> getTrendingFragment()
             MainFragmentType.FRAGMENT_BOARD -> getBoardFragment()
+            MainFragmentType.FRAGMENT_HOME -> getHomeFragment()
+            MainFragmentType.FRAGMENT_CHAT -> getChatFragment()
             MainFragmentType.FRAGMENT_NOTIFICATIONS -> getNotificationsFragment()
         }
     }
 
     fun clearAllFragments() {
-        mHomeFragment = null
         mBoardFragment = null
+        mHomeFragment = null
         mNotificationsFragment = null
-        mTrendingFragment = null
+        mChatFragment = null
     }
 
     //region Inner Classes
 
     enum class MainFragmentType {
-        FRAGMENT_HOME,
-        FRAGMENT_TRENDING,
         FRAGMENT_BOARD,
+        FRAGMENT_HOME,
+        FRAGMENT_CHAT,
         FRAGMENT_NOTIFICATIONS
     }
 
