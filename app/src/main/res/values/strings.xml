@@ -23,14 +23,21 @@
     <string name="login_no_account_button">Não tem uma conta? Registre-se!</string>
 
     <!-- Register -->
-    <string name="register_label">Cadastrar</string>
+    <string name="register_label">Criar Conta</string>
+    <string name="full_name">Nome</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="create_account">Cadastrar</string>
+
 
     <!-- Main -->
     <string name="main_home_bottombar_text">Home</string>
     <string name="main_chat_bottombar_text">Chat</string>
     <string name="main_board_bottombar_text">Board</string>
     <string name="main_notifications_bottombar_text">Notificações</string>
+    <string name="cadastro">Cadastro</string>
 
     <string name="placeholder">\@will_byers</string>
+
 
 </resources>

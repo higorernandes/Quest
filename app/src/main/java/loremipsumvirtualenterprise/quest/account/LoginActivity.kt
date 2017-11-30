@@ -17,8 +17,10 @@ import loremipsumvirtualenterprise.quest.main.MainActivity
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener
 {
-    //region Companion Object
 
+
+
+    //region Companion Object
     companion object {
         fun getActivityIntent(context : Context) : Intent {
             return Intent(context, LoginActivity::class.java)

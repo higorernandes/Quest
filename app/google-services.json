@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1061648350280",
+    "firebase_url": "https://quest-66520.firebaseio.com",
+    "project_id": "quest-66520",
+    "storage_bucket": "quest-66520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061648350280:android:42e9bce208f67474",
+        "android_client_info": {
+          "package_name": "loremipsumvirtualenterprise.quest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061648350280-mslbnfrivcn40j9lir4c832drp2mg1b0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "loremipsumvirtualenterprise.quest",
+            "certificate_hash": "5f0fe06713e1a10f52b0a6b0bd2e82550903869b"
+          }
+        },
+        {
+          "client_id": "1061648350280-si2jvtitrgc65dcjjr5171ug9gt105u2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJFZ4LtbjI-kY6Q2cUhifBkxlpKgG2Lk8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061648350280-si2jvtitrgc65dcjjr5171ug9gt105u2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
