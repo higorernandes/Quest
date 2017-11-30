@@ -9,22 +9,34 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
+import android.text.TextUtils.*
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
 
 class RegisterActivity : AppCompatActivity() {
+
+    // Constants
+    private val TAG = "RegisterActivity"
 
     //UI elements
     private var fullNameEditText: EditText? = null
     private var emailEditText: EditText? = null
     private var passwordEditText: EditText? = null
     private var createAccountButton: Button? = null
-    private var progressDialog: ProgressBar? = null
+
+    // Properties
+
+    //Firebase references
+    private var firebaseAuth: FirebaseAuth? = null
 
     // Lifecycle
     companion object {
@@ -37,9 +49,15 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        initializeVariables()
         bindUIElements()
         configureUIElements()
         configureListeners()
+    }
+
+    // Initialization
+    private fun initializeVariables() {
+        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     // Binding
@@ -50,8 +68,6 @@ class RegisterActivity : AppCompatActivity() {
         passwordEditText = findViewById<EditText>(R.id.et_password) as EditText
         // Buttons
         createAccountButton = findViewById<Button>(R.id.btn_create_account) as Button
-        // Other
-        progressDialog = ProgressBar(this)
     }
 
     // UI Configuration
@@ -82,10 +98,76 @@ class RegisterActivity : AppCompatActivity() {
         createAccountButton!!.setOnClickListener( { createAccount() } )
     }
 
-   // Actions
+    // Actions
     private  fun createAccount() {
-       print("coisa")
-   }
+        if (areFieldsValid()) {
+            // Get Data
+            val fullName = fullNameEditText!!.text.toString()
+            val email = emailEditText!!.text.toString()
+            val password = passwordEditText!!.text.toString()
+
+            // Start Progress
+//            progressBar!!.setMessage("Registrando usuário...")
+//            progressBar!!.show()
+
+            // Call FirebaseAuth
+            firebaseAuth!!
+                    .createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
+//                        progressBar!!.hide()
+                        if (task.isSuccessful) {
+                            Toast.makeText(this@RegisterActivity, "Usuário criado com sucesso.", Toast.LENGTH_SHORT).show()
+                            // TODO: Do Autologin
+                        } else{
+                            Toast.makeText(this@RegisterActivity, "CreateAccount Fail!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+        }
+    }
+
+    private fun loginUser(email: String, password: String) {
+
+    }
+
+
+    // Validation
+    private fun areFieldsValid(): Boolean {
+        val isValidName = isValidName(fullNameEditText?.text.toString())
+        val isValidEmail = isValidEmail(emailEditText?.text.toString())
+        val isValidPassword =  isValidPassword(passwordEditText?.text.toString())
+        return isValidName && isValidEmail && isValidPassword
+    }
+
+
+    private fun isValidName(fullName: String): Boolean {
+        if (TextUtils.isEmpty(fullName)) {
+            fullNameEditText?.error = "Nome inválido."
+            return false
+        }
+        fullNameEditText?.error = null
+        return true
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            emailEditText?.error = "E-Mail inválido."
+            return false
+        }
+        emailEditText?.error = null
+        return true
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        if (TextUtils.isEmpty(password)) {
+            passwordEditText?.error = "Senha inválida."
+            return false
+        } else if(password.length < 6) {
+            passwordEditText?.error = "A senha precisa ter no mínimo 6 caracteres."
+            return false
+        }
+        emailEditText?.error = null
+        return true
+    }
 
 
 }
