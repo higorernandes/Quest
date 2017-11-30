@@ -21,6 +21,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
+import loremipsumvirtualenterprise.quest.main.MainActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -68,12 +69,14 @@ class RegisterActivity : AppCompatActivity() {
         passwordEditText = findViewById<EditText>(R.id.et_password) as EditText
         // Buttons
         createAccountButton = findViewById<Button>(R.id.btn_create_account) as Button
+        // Other
     }
 
     // UI Configuration
     private fun configureUIElements() {
         configureEditTexts()
         configureStatusBar()
+        configureToolbar()
     }
 
     private fun configureEditTexts() {
@@ -83,6 +86,23 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun configureStatusBar() {
+        val window = window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorBackground)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val decor = getWindow().decorView
+            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+
+    private fun configureToolbar() {
+        setSupportActionBar(mainToolbar as Toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+    }
+
+    private fun changeStatusBarColor() {
         val window = window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorBackground)
@@ -117,16 +137,24 @@ class RegisterActivity : AppCompatActivity() {
 //                        progressBar!!.hide()
                         if (task.isSuccessful) {
                             Toast.makeText(this@RegisterActivity, "Usuário criado com sucesso.", Toast.LENGTH_SHORT).show()
-                            // TODO: Do Autologin
-                        } else{
-                            Toast.makeText(this@RegisterActivity, "CreateAccount Fail!", Toast.LENGTH_SHORT).show()
+                            loginUser(email, password)
+                        } else {
+                            Toast.makeText(this@RegisterActivity, "Houve um erro ao registratar o usuário.", Toast.LENGTH_SHORT).show()
                         }
                     }
         }
     }
 
     private fun loginUser(email: String, password: String) {
-
+        firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
+                startActivity(mainActivityIntent)
+            } else {
+                // TODO: Go back to login
+                onBackPressed()
+            }
+        }
     }
 
 
@@ -165,7 +193,7 @@ class RegisterActivity : AppCompatActivity() {
             passwordEditText?.error = "A senha precisa ter no mínimo 6 caracteres."
             return false
         }
-        emailEditText?.error = null
+        passwordEditText?.error = null
         return true
     }
 

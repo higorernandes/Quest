@@ -8,9 +8,13 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.EditText
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.main.MainActivity
@@ -18,7 +22,8 @@ import loremipsumvirtualenterprise.quest.main.MainActivity
 class LoginActivity : AppCompatActivity(), View.OnClickListener
 {
 
-
+    //Firebase references
+    private var firebaseAuth: FirebaseAuth? = null
 
     //region Companion Object
     companion object {
@@ -34,18 +39,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         initViews()
         setUpToolbar()
         changeStatusBarColor()
+        initializeVariables()
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.loginLoginButton -> {
-                val intent : Intent = MainActivity.getActivityIntent(this)
-                startActivity(intent)
-            }
+            R.id.loginLoginButton -> { doLogin() }
             R.id.loginForgotPasswordButton -> {
                 // TODO: handle "Forgot Password"
             }
@@ -70,8 +72,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     //endregion
 
     //region Private Methods
+    private fun initializeVariables() {
+        firebaseAuth = FirebaseAuth.getInstance()
+    }
 
     private fun initViews() {
+
         loginPasswordEditText.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
 
         loginLoginButton.setOnClickListener(this)
@@ -97,4 +103,55 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     }
 
     //endregion
+
+    // Actions
+    private fun doLogin() {
+        if (areFieldsValid()){
+            val email = loginLoginEditText!!.text.toString()
+            val password = loginPasswordEditText!!.text.toString()
+
+            // TODO: Show Loader
+
+            firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+
+                // TODO: Hide Loader
+
+                if (task.isSuccessful) {
+                    val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
+                    startActivity(mainActivityIntent)
+                } else {
+                    Toast.makeText(this@LoginActivity, "Houve um erro ao logar o usuário.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    // Validation
+    private fun areFieldsValid(): Boolean {
+        val isValidEmail = isValidEmail(loginLoginEditText?.text.toString())
+        val isValidPassword =  isValidPassword(loginPasswordEditText?.text.toString())
+        return isValidEmail && isValidPassword
+    }
+
+
+    private fun isValidEmail(email: String): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            loginLoginEditText?.error = "E-Mail inválido."
+            return false
+        }
+        loginLoginEditText?.error = null
+        return true
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        if (TextUtils.isEmpty(password)) {
+            loginPasswordEditText?.error = "Senha inválida."
+            return false
+        } else if(password.length < 6) {
+            loginPasswordEditText?.error = "A senha precisa ter no mínimo 6 caracteres."
+            return false
+        }
+        loginPasswordEditText?.error = null
+        return true
+    }
 }

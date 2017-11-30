@@ -17,7 +17,7 @@
 
     <!-- Login -->
     <string name="login_label">Login</string>
-    <string name="login_login">Login</string>
+    <string name="login_login">E-Mail</string>
     <string name="login_password">Senha</string>
     <string name="login_forgot_password">Esqueceu sua senha?</string>
     <string name="login_no_account_button">Não tem uma conta? Registre-se!</string>
