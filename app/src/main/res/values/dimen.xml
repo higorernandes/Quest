@@ -7,6 +7,7 @@
 
     <!-- Font sizes -->
     <dimen name="font_size_extra_small">10dp</dimen>
+    <dimen name="font_size_small">12dp</dimen>
     <dimen name="font_size_default">14dp</dimen>
     <dimen name="font_size_large">18dp</dimen>
 
@@ -17,6 +18,7 @@
 
     <!-- Images -->
     <dimen name="image_default_size">200dp</dimen>
+    <dimen name="profile_default_size">60dp</dimen>
 
     <!-- Card -->
     <dimen name="cardview_large_margin">20dp</dimen>
@@ -25,5 +27,6 @@
 
     <!-- Misc -->
     <dimen name="divider_height">1dp</dimen>
+    <dimen name="badge_size">15dp</dimen>
 
 </resources>

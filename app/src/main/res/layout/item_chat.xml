@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cardview_default_margin"
+        android:layout_marginBottom="@dimen/cardview_default_margin"
+        android:layout_marginStart="@dimen/default_medium_margin"
+        android:layout_marginEnd="@dimen/default_medium_margin"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/chatProfilePictureImageView"
+            android:layout_width="@dimen/profile_default_size"
+            android:layout_height="@dimen/profile_default_size"
+            android:layout_marginEnd="@dimen/default_medium_margin"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="6">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:fontFamily="@font/avenir_next_demi"
+                    android:text="Rick Sanchéz"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/font_size_default" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/avenir_next_regular"
+                    android:text="22:58"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/font_size_small" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:layout_marginTop="@dimen/cardview_small_margin"
+                    android:alpha="0.55"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/avenir_next_regular"
+                    android:maxLines="2"
+                    android:text="Hey Morty! Hand me that screwdriver!"
+                    android:gravity="center|start"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/font_size_small" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/cardview_default_margin"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="@dimen/badge_size"
+                        android:layout_height="@dimen/badge_size"
+                        android:background="@drawable/ic_chat_badge"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:alpha="0.33"
+        android:background="@color/colorDisabledText"
+        android:layout_marginStart="86dp"/>
+
+</LinearLayout>

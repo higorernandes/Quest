@@ -90,7 +90,7 @@
 
     <style name="QuestDescriptionTextStyle">
         <item name="android:textColor">@color/colorPrimaryText</item>
-        <item name="android:textSize">@dimen/font_size_default</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:fontFamily">@font/avenir_next_regular</item>
         <item name="android:maxLines">5</item>
         <item name="android:ellipsize">end</item>
