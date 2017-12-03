@@ -29,6 +29,11 @@
     <string name="password">Senha</string>
     <string name="create_account">Cadastrar</string>
 
+    <!-- Forgot Password  -->
+    <string name="reset_password_label">Resetar Senha</string>
+    <string name="reset_password_info_label">Para receber uma nova senha, digite seu e-mail e toque no botão resetar.</string>
+    <string name="reset_password_button">Resetar</string>
+
 
     <!-- Main -->
     <string name="main_home_bottombar_text">Home</string>

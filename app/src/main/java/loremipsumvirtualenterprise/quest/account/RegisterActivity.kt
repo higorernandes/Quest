@@ -18,12 +18,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.main.MainActivity
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(){
 
     // Constants
     private val TAG = "RegisterActivity"
@@ -126,33 +128,34 @@ class RegisterActivity : AppCompatActivity() {
             val email = emailEditText!!.text.toString()
             val password = passwordEditText!!.text.toString()
 
-            // Start Progress
-//            progressBar!!.setMessage("Registrando usuário...")
-//            progressBar!!.show()
+            // TODO: Start Progress View
 
             // Call FirebaseAuth
             firebaseAuth!!
                     .createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) { task ->
-//                        progressBar!!.hide()
+                    .addOnCompleteListener(this) { task: Task<AuthResult> ->
+                        // TODO: Stop Progress View
                         if (task.isSuccessful) {
-                            Toast.makeText(this@RegisterActivity, "Usuário criado com sucesso.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity, "Usuário criado com sucesso.\nLogando...", Toast.LENGTH_SHORT).show()
                             loginUser(email, password)
                         } else {
-                            Toast.makeText(this@RegisterActivity, "Houve um erro ao registratar o usuário.", Toast.LENGTH_SHORT).show()
+                            val message = task.exception?.getLocalizedMessage()
+                            Toast.makeText(this@RegisterActivity, "Houve um erro ao registrar o usuário.\n" + message, Toast.LENGTH_SHORT).show()
                         }
                     }
         }
     }
 
     private fun loginUser(email: String, password: String) {
+        // TODO: Start Progress View
         firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                // TODO: Stop Progress View
                 val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
                 startActivity(mainActivityIntent)
             } else {
                 // TODO: Go back to login
-                onBackPressed()
+                super.onBackPressed()
             }
         }
     }

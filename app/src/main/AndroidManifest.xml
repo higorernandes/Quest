@@ -38,7 +38,13 @@
         <activity android:name=".account.RegisterActivity"
             android:screenOrientation="portrait"
             android:label="@string/register_label"
-            android:parentActivityName=".account.OnboardingActivity"/>
+            android:parentActivityName=".account.LoginActivity"/>
+
+        <!-- Forgot Password -->
+        <activity android:name=".account.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/login_forgot_password"
+            android:parentActivityName=".account.LoginActivity"/>
 
         <!-- Settings -->
         <activity android:name=".settings.SettingsActivity"

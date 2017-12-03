@@ -14,6 +14,8 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
@@ -49,7 +51,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
         when (view?.id) {
             R.id.loginLoginButton -> { doLogin() }
             R.id.loginForgotPasswordButton -> {
-                // TODO: handle "Forgot Password"
+                val intent : Intent = ForgotPasswordActivity.getActivityIntent(this)
+                startActivity(intent)
+                finish()
             }
             R.id.loginNoAccountButton -> {
                 val intent : Intent = RegisterActivity.getActivityIntent(this)
@@ -112,7 +116,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
 
             // TODO: Show Loader
 
-            firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
 
                 // TODO: Hide Loader
 
@@ -120,7 +124,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
                     val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
                     startActivity(mainActivityIntent)
                 } else {
-                    Toast.makeText(this@LoginActivity, "Houve um erro ao logar o usuário.", Toast.LENGTH_SHORT).show()
+                    val message = task.exception?.getLocalizedMessage()
+                    Toast.makeText(this@LoginActivity, "Houve um erro ao logar o usuário.\n" + message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
