@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="loremipsumvirtualenterprise.quest.main.quest.CreateQuestActivity">
+
+    <!-- Toolbar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <include
+            android:id="@+id/mainToolbar"
+            layout="@layout/toolbar_main"
+            android:elevation="7dp" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout"
+        android:layout_marginTop="@dimen/default_medium_margin"
+        android:layout_marginBottom="@dimen/default_medium_margin"
+        android:layout_marginStart="@dimen/default_large_margin"
+        android:layout_marginEnd="@dimen/default_large_margin"
+        android:orientation="vertical">
+
+        <!-- Quest title field -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/createQuestTitleTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_medium_margin"
+            android:theme="@style/WhiteTextInputLayout">
+
+            <EditText
+                android:id="@+id/createQuestTitleEditText"
+                style="@style/WhiteEditTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/create_quest_title"
+                android:maxLines="3"
+                android:singleLine="true"
+                android:theme="@style/WhiteEditTextTheme" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Quest title field -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/createQuestDescriptionTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_medium_margin"
+            android:theme="@style/WhiteTextInputLayout">
+
+            <!-- Quest description field -->
+            <EditText
+                android:id="@+id/createQuestDescriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_medium_margin"
+                android:hint="@string/create_quest_description_label"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:background="@android:color/white"
+                android:padding="@dimen/cardview_default_margin"
+                android:lines="5"
+                android:maxLines="5"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/onboardingLoginButton"
+        android:layout_width="match_parent"
+        android:text="@string/create_quest_button_text"
+        android:layout_alignParentBottom="true"
+        style="@style/BottomButtonTheme"/>
+
+</RelativeLayout>

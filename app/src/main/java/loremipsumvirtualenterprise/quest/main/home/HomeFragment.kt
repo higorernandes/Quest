@@ -2,7 +2,6 @@ package loremipsumvirtualenterprise.quest.main.home
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.Nullable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
+import loremipsumvirtualenterprise.quest.main.quest.CreateQuestActivity
 
 /**
  * Created by root on 2017-11-26.
@@ -49,6 +49,7 @@ class HomeFragment : MainGenericFragment()
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         setUpToolbar()
     }
 
@@ -58,6 +59,12 @@ class HomeFragment : MainGenericFragment()
 
     private fun setUpToolbar() {
         mainToolbarTitleTextView.text = resources.getString(R.string.main_home_bottombar_text)
+    }
+
+    private fun initViews() {
+        mainHomeFloatingActionButton.setOnClickListener {
+            startActivity(CreateQuestActivity.getActivityIntent(context))
+        }
     }
 
     //endregion

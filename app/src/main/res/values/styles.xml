@@ -116,4 +116,29 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="SettingHeaderTextStyle">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/font_size_extra_small</item>
+        <item name="android:fontFamily">@font/avenir_next_regular</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="SettingPrimaryInfoTextStyle">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/font_size_default</item>
+        <item name="android:fontFamily">@font/avenir_next_regular</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SettingSecondaryInfoTextStyle">
+        <item name="android:textColor">@color/colorDisabledText</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:fontFamily">@font/avenir_next_regular</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>

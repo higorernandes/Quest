@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_main_board.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
+import loremipsumvirtualenterprise.quest.main.quest.CreateQuestActivity
 import loremipsumvirtualenterprise.quest.model.Quest
 
 /**
@@ -76,6 +77,9 @@ class BoardFragment : MainGenericFragment()
             //TODO: Navigate to QuestDetailActivity.
         }
         mainBoardRecyclerView.adapter = mQuestsAdapter
+        boardFloatingActionButton.setOnClickListener {
+            startActivity(CreateQuestActivity.getActivityIntent(context))
+        }
     }
 
     private fun loadQuests() {

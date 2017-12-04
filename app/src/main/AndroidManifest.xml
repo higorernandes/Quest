@@ -4,7 +4,7 @@
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,34 +15,48 @@
         android:theme="@style/AppTheme">
 
         <!-- Onboarding -->
-        <activity android:name=".account.OnboardingActivity"
+        <activity
+            android:name=".account.OnboardingActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Main Activity -->
-        <activity android:name=".main.MainActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+        <!-- Main -->
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <!-- Login -->
-        <activity android:name=".account.LoginActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".account.LoginActivity"
             android:label="@string/login_label"
-            android:parentActivityName=".account.OnboardingActivity"/>
+            android:parentActivityName=".account.OnboardingActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Register -->
-        <activity android:name=".account.RegisterActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".account.RegisterActivity"
             android:label="@string/register_label"
-            android:parentActivityName=".account.OnboardingActivity"/>
+            android:parentActivityName=".account.OnboardingActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Settings -->
-        <activity android:name=".settings.SettingsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme" />
+
+        <!-- Create Quest -->
+        <activity
+            android:name=".main.quest.CreateQuestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"  />
     </application>
 
 </manifest>

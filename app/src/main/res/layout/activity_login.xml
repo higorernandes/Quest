@@ -59,6 +59,7 @@
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:text="higorernandes@gmail.com"
                 android:theme="@style/WhiteEditTextTheme" />
 
         </android.support.design.widget.TextInputLayout>
@@ -80,6 +81,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:text="teste123"
                 android:theme="@style/WhiteEditTextTheme" />
 
         </android.support.design.widget.TextInputLayout>

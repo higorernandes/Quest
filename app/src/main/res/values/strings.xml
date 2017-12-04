@@ -29,7 +29,6 @@
     <string name="password">Senha</string>
     <string name="create_account">Cadastrar</string>
 
-
     <!-- Main -->
     <string name="main_home_bottombar_text">Home</string>
     <string name="main_chat_bottombar_text">Chat</string>
@@ -39,5 +38,16 @@
 
     <string name="placeholder">\@will_byers</string>
 
+    <!-- Create Quest-->
+    <string name="create_new_quest">Nova Quest</string>
+    <string name="create_quest_button_text">Criar Quest</string>
+    <string name="create_quest_title">Título</string>
+    <string name="create_quest_description_label">Descrição</string>
+
+    <!-- Settings -->
+    <string name="settings_toolbar_title">Configurações</string>
+    <string name="settings_account">Minha conta</string>
+    <string name="settings_notifications">Notificações</string>
+    <string name="settings_other">Outros</string>
 
 </resources>

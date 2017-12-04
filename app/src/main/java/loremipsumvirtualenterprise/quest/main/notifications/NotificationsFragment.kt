@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
+import loremipsumvirtualenterprise.quest.settings.SettingsActivity
 
 /**
  * Created by root on 2017-11-26.
@@ -58,6 +59,9 @@ class NotificationsFragment : MainGenericFragment()
         mainToolbarTitleTextView.text = resources.getString(R.string.main_notifications_bottombar_text)
         mainToolbarActionIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_settings))
         mainToolbarActionButton.visibility = View.VISIBLE
+        mainToolbarActionButton.setOnClickListener {
+            startActivity(SettingsActivity.getActivityIntent(context))
+        }
     }
 
     //endregion

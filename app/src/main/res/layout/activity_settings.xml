@@ -1,9 +1,353 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="loremipsumvirtualenterprise.quest.settings.SettingsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Toolbar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <include
+            android:id="@+id/settingsToolbar"
+            layout="@layout/toolbar_login"
+            android:elevation="7dp" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appBarLayout">
+
+        <!-- Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Account Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_account"
+                    android:theme="@style/SettingHeaderTextStyle"
+                    android:layout_marginTop="@dimen/default_medium_margin"
+                    android:layout_marginBottom="@dimen/default_small_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginBottom="@dimen/cardview_default_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Informações pessoais"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alterar senha"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Excluir conta"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+            </LinearLayout>
+
+            <!-- Notifications Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/default_medium_margin"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_notifications"
+                    android:theme="@style/SettingHeaderTextStyle"
+                    android:layout_marginTop="@dimen/default_medium_margin"
+                    android:layout_marginBottom="@dimen/default_small_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginBottom="@dimen/cardview_default_margin"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Respostas"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Todas as respostas"
+                    android:theme="@style/SettingSecondaryInfoTextStyle"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Perguntas"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mais relevantes apenas"
+                    android:theme="@style/SettingSecondaryInfoTextStyle"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chat"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Todos os chats"
+                    android:theme="@style/SettingSecondaryInfoTextStyle"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sugestões"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Semanalmente"
+                    android:theme="@style/SettingSecondaryInfoTextStyle"
+                    android:layout_marginBottom="@dimen/default_medium_margin"/>
+
+
+            </LinearLayout>
+
+            <!-- Privacy Policy Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/default_medium_margin"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_other"
+                    android:theme="@style/SettingHeaderTextStyle"
+                    android:layout_marginTop="@dimen/default_medium_margin"
+                    android:layout_marginBottom="@dimen/default_small_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorPrimary"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Política de privacidade"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sobre o app"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"
+                    android:layout_marginBottom="@dimen/cardview_large_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:alpha="0.33"
+                    android:background="@color/colorDivider"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/settingsLogoutLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/default_medium_margin"
+                android:layout_marginEnd="@dimen/default_medium_margin"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:theme="@style/SettingPrimaryInfoTextStyle"
+                    android:layout_marginTop="@dimen/cardview_large_margin"
+                    android:layout_marginBottom="@dimen/default_extra_large_margin"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

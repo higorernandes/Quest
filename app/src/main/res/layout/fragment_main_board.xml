@@ -30,4 +30,13 @@
         android:fadingEdge="vertical"
         android:fadingEdgeLength="30dp"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/boardFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/default_medium_margin"
+        android:layout_marginBottom="@dimen/default_medium_margin"/>
+
 </RelativeLayout>

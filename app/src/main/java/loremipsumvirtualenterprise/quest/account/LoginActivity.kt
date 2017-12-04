@@ -47,7 +47,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.loginLoginButton -> { doLogin() }
+            R.id.loginLoginButton -> {
+                startActivity(MainActivity.getActivityIntent(this))
+                //doLogin()
+            }
             R.id.loginForgotPasswordButton -> {
                 // TODO: handle "Forgot Password"
             }
@@ -72,12 +75,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     //endregion
 
     //region Private Methods
+
     private fun initializeVariables() {
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
     private fun initViews() {
-
         loginPasswordEditText.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
 
         loginLoginButton.setOnClickListener(this)
