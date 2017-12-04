@@ -332,17 +332,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="@dimen/default_medium_margin"
-                android:layout_marginEnd="@dimen/default_medium_margin"
+                android:paddingStart="@dimen/default_medium_margin"
+                android:paddingEnd="@dimen/default_medium_margin"
+                android:paddingTop="@dimen/cardview_large_margin"
+                android:paddingBottom="@dimen/cardview_large_margin"
+                android:layout_marginBottom="@dimen/default_large_margin"
                 android:foreground="?attr/selectableItemBackground">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Logout"
-                    android:theme="@style/SettingPrimaryInfoTextStyle"
-                    android:layout_marginTop="@dimen/cardview_large_margin"
-                    android:layout_marginBottom="@dimen/default_extra_large_margin"/>
+                    android:theme="@style/SettingPrimaryInfoTextStyle"/>
 
             </LinearLayout>
 

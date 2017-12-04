@@ -134,10 +134,11 @@
     </style>
 
     <style name="SettingSecondaryInfoTextStyle">
-        <item name="android:textColor">@color/colorDisabledText</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
         <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:fontFamily">@font/avenir_next_regular</item>
         <item name="android:maxLines">5</item>
+        <item name="android:alpha">0.55</item>
         <item name="android:ellipsize">end</item>
     </style>
 

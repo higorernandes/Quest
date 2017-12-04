@@ -20,7 +20,6 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,8 +41,14 @@
         <activity
             android:name=".account.RegisterActivity"
             android:label="@string/register_label"
-            android:parentActivityName=".account.OnboardingActivity"
-            android:screenOrientation="portrait" />
+            android:parentActivityName=".account.LoginActivity"
+            android:screenOrientation="portrait"/>
+
+        <!-- Forgot Password -->
+        <activity android:name=".account.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/login_forgot_password"
+            android:parentActivityName=".account.LoginActivity" />
 
         <!-- Settings -->
         <activity
@@ -57,6 +62,7 @@
             android:name=".main.quest.CreateQuestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"  />
+
     </application>
 
 </manifest>
