@@ -30,7 +30,10 @@ abstract class QuestGenericActivity : AppCompatActivity()
     fun setUpToolbar(toolbar: Toolbar?, text: String?) {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.title = ""
         if (text != null) {
             if (mainToolbarTitleTextView != null) {
                 mainToolbarTitleTextView.text = text

@@ -53,7 +53,11 @@
     <string name="settings_notifications">Notificações</string>
     <string name="settings_other">Outros</string>
 
+    <!-- Search -->
+    <string name="search_hint_text">Busque uma Quest pelo título…</string>
     <string name="placeholder">\@will_byers</string>
 
+    <!-- Details -->
+    <string name="detail_title">Detalhes</string>
 
 </resources>

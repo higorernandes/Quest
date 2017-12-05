@@ -20,6 +20,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,27 +43,38 @@
             android:name=".account.RegisterActivity"
             android:label="@string/register_label"
             android:parentActivityName=".account.LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- Forgot Password -->
-        <activity android:name=".account.ForgotPasswordActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".account.ForgotPasswordActivity"
             android:label="@string/login_forgot_password"
-            android:parentActivityName=".account.LoginActivity" />
+            android:parentActivityName=".account.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Settings -->
         <activity
             android:name=".settings.SettingsActivity"
-            android:screenOrientation="portrait"
             android:parentActivityName=".main.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!-- Create Quest -->
         <activity
             android:name=".main.quest.CreateQuestActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"  />
+            android:theme="@style/AppTheme" />
 
+        <!-- Search -->
+        <activity
+            android:name=".main.board.SearchActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".main.MainActivity"/>
+
+        <!-- Quest Detail -->
+        <activity
+            android:name=".main.quest.QuestDetailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

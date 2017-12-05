@@ -1,18 +1,20 @@
 package loremipsumvirtualenterprise.quest.main.board
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.LayoutInflater.*
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.model.Quest
 
 /**
  * Created by root on 2017-11-27.
  */
-class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>?, val clickListener: (View.OnClickListener) -> Unit) : RecyclerView.Adapter<QuestsArrayAdapter.Holder>()
+class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>?, private val clickListener: (Quest) -> Unit) : RecyclerView.Adapter<QuestsArrayAdapter.Holder>()
 {
     //region Attributes
 
@@ -21,10 +23,18 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
 
     //endregion
 
+    //region Interface
+
+    interface IQuestAdapterListener
+
+    //endregion
+
     //region Overridden Methods
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {
         var questItem: Quest = mObjects!![position]
+
+        holder?.itemBoardQuestRootView?.setOnClickListener { clickListener(questItem)}
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
@@ -44,9 +54,12 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
 
     //region Inner Class
 
-    class Holder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
+    class Holder constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
+        var itemBoardQuestRootView : LinearLayout? = null
 
+        init {
+            itemBoardQuestRootView = itemView.findViewById<LinearLayout>(R.id.itemBoardQuestRootView)
         }
     }
 

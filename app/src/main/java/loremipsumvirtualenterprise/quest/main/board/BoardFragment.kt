@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
 import loremipsumvirtualenterprise.quest.main.quest.CreateQuestActivity
+import loremipsumvirtualenterprise.quest.main.quest.QuestDetailActivity
 import loremipsumvirtualenterprise.quest.model.Quest
 
 /**
@@ -66,27 +67,28 @@ class BoardFragment : MainGenericFragment()
         mainToolbarTitleTextView.text = resources.getString(R.string.main_board_bottombar_text)
         mainToolbarActionButton.visibility = View.VISIBLE
         mainToolbarActionButton.setOnClickListener {
-            //TODO: Navigate to search.
+            startActivity(SearchActivity.getActivityIntent(context))
         }
     }
 
     private fun initViews() {
         mainBoardRecyclerView.itemAnimator = DefaultItemAnimator()
         mainBoardRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
-        mQuestsAdapter =  QuestsArrayAdapter(context, mObjects) {
-            //TODO: Navigate to QuestDetailActivity.
+        mQuestsAdapter =  QuestsArrayAdapter(context, mObjects) { item: Quest ->
+            startActivity(QuestDetailActivity.getActivityIntent(context, item.questId!!))
         }
         mainBoardRecyclerView.adapter = mQuestsAdapter
+
         boardFloatingActionButton.setOnClickListener {
             startActivity(CreateQuestActivity.getActivityIntent(context))
         }
     }
 
     private fun loadQuests() {
-        mObjects?.add(Quest())
-        mObjects?.add(Quest())
-        mObjects?.add(Quest())
-        mObjects?.add(Quest())
+        mObjects?.add(Quest(1))
+        mObjects?.add(Quest(2))
+        mObjects?.add(Quest(3))
+        mObjects?.add(Quest(4))
         mQuestsAdapter?.notifyDataSetChanged()
     }
 

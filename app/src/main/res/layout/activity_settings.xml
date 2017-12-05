@@ -15,7 +15,7 @@
 
         <include
             android:id="@+id/settingsToolbar"
-            layout="@layout/toolbar_login"
+            layout="@layout/toolbar_detail"
             android:elevation="7dp" />
 
     </android.support.design.widget.AppBarLayout>

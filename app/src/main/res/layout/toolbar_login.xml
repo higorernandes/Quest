@@ -4,23 +4,22 @@
     android:layout_height="56dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent"
-    app:theme="@style/ToolbarStyleDark">
+    app:theme="@style/ToolbarStyleDark"
+    app:titleMarginStart="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    android:gravity="center"
+    android:layout_gravity="center|top">
 
-    <RelativeLayout
+    <!-- Toolbar title -->
+    <TextView
+        android:id="@+id/mainToolbarTitleTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- Toolbar title -->
-        <TextView
-            android:id="@+id/mainToolbarTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/avenir_next_demi"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/font_size_large"/>
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/avenir_next_demi"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="@dimen/font_size_large"/>
 
 </android.support.v7.widget.Toolbar>
