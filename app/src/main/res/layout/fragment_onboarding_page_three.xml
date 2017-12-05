@@ -16,8 +16,7 @@
             android:layout_height="@dimen/image_default_size"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/default_medium_margin"
-            android:layout_marginTop="@dimen/default_large_margin"
-            android:src="@drawable/help_icon" />
+            android:layout_marginTop="@dimen/default_large_margin" />
 
     </LinearLayout>
 
