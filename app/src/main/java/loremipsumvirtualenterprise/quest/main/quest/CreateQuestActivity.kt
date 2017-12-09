@@ -18,10 +18,13 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.model.Quest
+import loremipsumvirtualenterprise.quest.model.QuestLike
+import loremipsumvirtualenterprise.quest.model.QuestResponse
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CreateQuestActivity : AppCompatActivity()
 {
@@ -141,12 +144,12 @@ class CreateQuestActivity : AppCompatActivity()
             quest.title = questTitleEditText?.text.toString()
             quest.description = questDescriptionEditText?.text.toString()
             quest.publishedAt = currentDateTime()
-            quest.publishedBy = FirebaseAuth.getInstance().currentUser
+            quest.publisherUID = FirebaseAuth.getInstance().currentUser!!.uid
 
             // Set the value to the newFirebaseQuestItem
             newFirebaseQuestItem.setValue(quest)
 
-            // Dismiss activye and show success dialog
+            // Dismiss activity and show success dialog
             finish()
             Toast.makeText(this, "New quest saved!", Toast.LENGTH_SHORT).show()
         }

@@ -17,7 +17,7 @@ class Quest {
     var title: String? = null
     var description: String? = null
     var publishedAt: String? = null
-    var publishedBy: FirebaseUser? = null
+    var publisherUID: String? = null
     var likes: Array<QuestLike>? = null
     var responses: Array<QuestResponse>? = null
 

@@ -24,7 +24,7 @@ class QuestDetailActivity : QuestGenericActivity()
     companion object {
         private val QUEST_ID: String = "QUEST_ID"
 
-        fun getActivityIntent(context: Context, questId: Int) : Intent {
+        fun getActivityIntent(context: Context, questId: String) : Intent {
             val intent = Intent(context, QuestDetailActivity::class.java)
             intent.putExtra(QUEST_ID, questId)
             return intent
