@@ -59,7 +59,7 @@
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="higorernandes@gmail.com"
+                android:text="dubocato@gmail.com"
                 android:theme="@style/WhiteEditTextTheme" />
 
         </android.support.design.widget.TextInputLayout>

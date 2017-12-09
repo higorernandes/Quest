@@ -77,7 +77,7 @@
 
     <!-- Login Button -->
     <Button
-        android:id="@+id/onboardingLoginButton"
+        android:id="@+id/createQuestButton"
         android:layout_width="match_parent"
         android:text="@string/create_quest_button_text"
         android:layout_alignParentBottom="true"

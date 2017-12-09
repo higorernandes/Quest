@@ -50,8 +50,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.loginLoginButton -> {
-                startActivity(MainActivity.getActivityIntent(this))
-                //doLogin()
+//                startActivity(MainActivity.getActivityIntent(this))
+                doLogin()
             }
             R.id.loginForgotPasswordButton -> {
                 val intent : Intent = ForgotPasswordActivity.getActivityIntent(this)

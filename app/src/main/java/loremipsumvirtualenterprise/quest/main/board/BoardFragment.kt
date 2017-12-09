@@ -21,16 +21,15 @@ import loremipsumvirtualenterprise.quest.model.Quest
  */
 class BoardFragment : MainGenericFragment()
 {
-    //region Attributes
 
+    // View Elements
     private var mContext : Context? = null
     private var mQuestsAdapter : QuestsArrayAdapter? = null
+
+    // Properties
     private var mObjects : ArrayList<Quest>? = ArrayList<Quest>()
 
-    //endregion
-
-    //region Companion Object
-
+    // Instantiation
     companion object {
         fun newInstance(): BoardFragment {
             val fragment = BoardFragment()
@@ -40,10 +39,7 @@ class BoardFragment : MainGenericFragment()
         }
     }
 
-    //endregion
-
-    //region Overridden Methods
-
+    //
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mContext = container?.context
         return inflater?.inflate(R.layout.fragment_main_board, container, false)
@@ -61,8 +57,7 @@ class BoardFragment : MainGenericFragment()
 
     //endregion
 
-    //region Private Methods
-
+    // Configuration
     private fun setUpToolbar() {
         mainToolbarTitleTextView.text = resources.getString(R.string.main_board_bottombar_text)
         mainToolbarActionButton.visibility = View.VISIBLE
@@ -75,7 +70,7 @@ class BoardFragment : MainGenericFragment()
         mainBoardRecyclerView.itemAnimator = DefaultItemAnimator()
         mainBoardRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
         mQuestsAdapter =  QuestsArrayAdapter(context, mObjects) { item: Quest ->
-            startActivity(QuestDetailActivity.getActivityIntent(context, item.questId!!))
+//            startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!))
         }
         mainBoardRecyclerView.adapter = mQuestsAdapter
 
@@ -85,10 +80,10 @@ class BoardFragment : MainGenericFragment()
     }
 
     private fun loadQuests() {
-        mObjects?.add(Quest(1))
-        mObjects?.add(Quest(2))
-        mObjects?.add(Quest(3))
-        mObjects?.add(Quest(4))
+        mObjects?.add(Quest())
+        mObjects?.add(Quest())
+        mObjects?.add(Quest())
+        mObjects?.add(Quest())
         mQuestsAdapter?.notifyDataSetChanged()
     }
 
