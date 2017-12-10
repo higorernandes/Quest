@@ -14,15 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- Splash -->
+        <activity
+            android:name=".account.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- Onboarding -->
         <activity
             android:name=".account.OnboardingActivity"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- Main -->
@@ -68,13 +73,14 @@
         <!-- Search -->
         <activity
             android:name=".main.board.SearchActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".main.MainActivity"/>
+            android:parentActivityName=".main.MainActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Quest Detail -->
         <activity
             android:name=".main.quest.QuestDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

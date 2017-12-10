@@ -20,14 +20,15 @@ import kotlinx.android.synthetic.main.activity_onboarding.*
 import loremipsumvirtualenterprise.quest.R
 import android.os.Build
 
-
-
 class OnboardingActivity : AppCompatActivity(), View.OnClickListener, ViewPager.OnPageChangeListener
 {
     private var mLayouts = intArrayOf()
 
     companion object {
         var instance : OnboardingActivity? = null
+        fun getActivityIntent(context : Context) : Intent {
+            return Intent(context, OnboardingActivity::class.java)
+        }
     }
 
     //region Overridden Methods

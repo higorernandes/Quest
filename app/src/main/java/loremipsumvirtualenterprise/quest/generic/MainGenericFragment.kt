@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
  */
 abstract class MainGenericFragment : Fragment()
 {
+    var mProgress: QuestGenericProgress? = null
     protected abstract fun onFragmentReselected()
 //    public abstract void setPresenter(IPresenter presenter)
 }

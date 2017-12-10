@@ -131,7 +131,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
                             android:gravity="end"
-                            android:text="42 likes • 73 respostas"
+                            android:text="@string/board_item_responses_text"
                             android:theme="@style/SecondaryInformationTheme" />
 
                     </LinearLayout>
@@ -141,6 +141,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/questResponsesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fadingEdgeLength="50dp"

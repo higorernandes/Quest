@@ -8,7 +8,7 @@ import loremipsumvirtualenterprise.quest.application.QuestApplication
 /**
  * Created by root on 2017-12-10.
  */
-object NetworkHelper {
+class NetworkHelper {
     /**
      * Checks whether there's an active internet connection at the current moment.
      * @return TRUE if there's internet, FALSE if you're offline.
