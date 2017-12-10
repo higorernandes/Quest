@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cardview_small_margin"
+        android:layout_marginBottom="@dimen/cardview_small_margin"
+        android:layout_marginStart="@dimen/cardview_default_margin"
+        android:layout_marginEnd="@dimen/cardview_default_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/containerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- User profile picture -->
+                <ImageView
+                    android:id="@+id/itemResponseAuthorImageView"
+                    android:layout_width="@dimen/profile_small_size"
+                    android:layout_height="@dimen/profile_small_size"
+                    android:layout_marginTop="@dimen/cardview_default_margin"
+                    android:layout_marginStart="@dimen/cardview_default_margin"
+                    android:scaleType="centerCrop"/>
+
+                <!-- Response content -->
+                <LinearLayout
+                    android:id="@+id/itemResponseContentContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardview_default_margin"
+                    android:layout_marginEnd="@dimen/cardview_default_margin"
+                    android:layout_marginTop="@dimen/cardview_small_margin"
+                    android:layout_toEndOf="@+id/itemResponseAuthorImageView"
+                    android:layout_toStartOf="@+id/itemResponseUpvoteDownvoteLayout"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/itemQuestResponseAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|end"
+                        android:focusableInTouchMode="false"
+                        android:layout_gravity="start"
+                        android:focusable="false"
+                        android:clickable="false"
+                        android:linksClickable="false"
+                        android:text="@string/placeholder2"
+                        style="@style/UnderlinedTextTheme"
+                        android:theme="@style/UnderlinedTextTheme" />
+
+                    <TextView
+                        android:id="@+id/itemQuestResponseText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Você pode solicitá-la no bloco 1A, na sala de atendimento ao aluno! Lá você encontrará auxílio sobre o seu problema bla bla bla"
+                        android:alpha="0.55"
+                        android:theme="@style/QuestDescriptionTextStyle"/>
+
+                </LinearLayout>
+
+                <!-- Upvote/downvote buttons and counter -->
+                <LinearLayout
+                    android:id="@+id/itemResponseUpvoteDownvoteLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/cardview_default_margin"
+                    android:layout_marginTop="@dimen/cardview_default_margin">
+
+                    <Button
+                        android:id="@+id/itemResponseUpvoteButton"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/colorAccent"
+                        android:background="@drawable/ic_arrow_down"
+                        android:rotation="180"/>
+
+                    <TextView
+                        android:id="@+id/itemResponseVotesCounter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.55"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:theme="@style/QuestDescriptionTextStyle"
+                        android:text="5"/>
+
+                    <Button
+                        android:id="@+id/itemResponseDownvoteButton"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/colorAccent"
+                        android:background="@drawable/ic_arrow_down" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/itemQuestPublishDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:gravity="end"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/cardview_default_margin"
+                android:layout_marginTop="@dimen/cardview_default_margin"
+                android:layout_marginBottom="@dimen/cardview_default_margin"
+                android:theme="@style/SecondaryInformationTheme"
+                android:layout_below="@+id/containerView"
+                android:text="27 de novembro de 2017"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

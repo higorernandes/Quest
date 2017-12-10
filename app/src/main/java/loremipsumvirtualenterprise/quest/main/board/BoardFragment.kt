@@ -14,9 +14,11 @@ import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_main_board.*
+import kotlinx.android.synthetic.main.layout_empty_list.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
+import loremipsumvirtualenterprise.quest.generic.QuestGenericProgress
 import loremipsumvirtualenterprise.quest.main.quest.CreateQuestActivity
 import loremipsumvirtualenterprise.quest.main.quest.QuestDetailActivity
 import loremipsumvirtualenterprise.quest.model.Quest
@@ -28,7 +30,6 @@ import loremipsumvirtualenterprise.quest.model.QuestResponse
  */
 class BoardFragment : MainGenericFragment()
 {
-
     // Constants
     private val TAG = "BoardFragment"
 
@@ -38,7 +39,7 @@ class BoardFragment : MainGenericFragment()
     // Properties
     private var mContext : Context? = null
     private var mQuestsAdapter : QuestsArrayAdapter? = null
-    private var mQuestsList : MutableList<Quest>? = null
+    private var mQuestsList : ArrayList<Quest> = ArrayList<Quest>()
 
     // Instantiation
     companion object {
@@ -68,14 +69,23 @@ class BoardFragment : MainGenericFragment()
 
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Item failed, log a message
+            mProgress?.hide()
             Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
+            emptyLayout.visibility = View.VISIBLE
+            mainBoardRecyclerView.visibility = View.GONE
         }
     }
 
     private fun loadDateFromSnapshot(dataSnapshot: DataSnapshot) {
 
+        mProgress?.show()
         val items = dataSnapshot.children.iterator()
-        mQuestsList = ArrayList<Quest>()
+        mQuestsList.clear()
+
+        if (emptyLayout.visibility == View.VISIBLE) {
+            emptyLayout.visibility = View.GONE
+            mainBoardRecyclerView.visibility = View.VISIBLE
+        }
 
         //Check if current database contains any collection
         if (items.hasNext()) {
@@ -85,13 +95,12 @@ class BoardFragment : MainGenericFragment()
             //check if the collection has any to do items or not
             while (itemsIterator.hasNext()) {
 
-
                 //get current item
                 val currentItem = itemsIterator.next()
                 val questItem = Quest.create()
 
                 //get current data in a map
-                val map = currentItem.getValue() as HashMap<String, Any>
+                val map = currentItem.value as HashMap<*, *>
 
                 //key will return Firebase ID
                 questItem.id = currentItem.key
@@ -103,13 +112,15 @@ class BoardFragment : MainGenericFragment()
 //                questItem.responses = map.get("responses") as Array<QuestResponse>?
 
                 // add to list
-                mQuestsList?.add(questItem)
+                mQuestsList.add(questItem)
             }
         }
 
-
         //alert adapter that has changed
-        mQuestsAdapter?.notifyDataSetChanged()
+        activity.runOnUiThread {
+            mProgress?.hide()
+            mQuestsAdapter?.notifyDataSetChanged()
+        }
     }
 
     // Lifecycle
@@ -120,10 +131,10 @@ class BoardFragment : MainGenericFragment()
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
         initializeVariables()
         configureListeners()
         setUpToolbar()
-        initViews()
     }
 
     override fun onFragmentReselected() { }
@@ -138,15 +149,18 @@ class BoardFragment : MainGenericFragment()
     }
 
     private fun initViews() {
+        mProgress = QuestGenericProgress(context)
         mainBoardRecyclerView.itemAnimator = DefaultItemAnimator()
         mainBoardRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
-        mQuestsAdapter =  QuestsArrayAdapter(context, mQuestsList as ArrayList<Quest>?) { item: Quest ->
+        mQuestsAdapter =  QuestsArrayAdapter(context, mQuestsList) { item: Quest ->
             startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!))
         }
         mainBoardRecyclerView.adapter = mQuestsAdapter
 
-        boardFloatingActionButton.setOnClickListener {
-            startActivity(CreateQuestActivity.getActivityIntent(context))
+        boardFloatingActionButton.setOnClickListener { startActivity(CreateQuestActivity.getActivityIntent(context)) }
+        noInternetReconnectButton.setOnClickListener {
+            initializeVariables()
+            configureListeners()
         }
     }
 

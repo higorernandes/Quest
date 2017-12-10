@@ -41,7 +41,7 @@
         style="@style/SettingPrimaryInfoTextStyle"/>
 
     <Button
-        android:id="@+id/no_internet_reconnect_button"
+        android:id="@+id/noInternetReconnectButton"
         android:layout_width="match_parent"
         android:text="@string/generic_try_again"
         android:layout_gravity="center"

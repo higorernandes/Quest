@@ -20,6 +20,7 @@
     <!-- Images -->
     <dimen name="image_default_size">200dp</dimen>
     <dimen name="profile_default_size">60dp</dimen>
+    <dimen name="profile_small_size">40dp</dimen>
 
     <!-- Card -->
     <dimen name="cardview_large_margin">20dp</dimen>

@@ -12,7 +12,6 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
-import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -21,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.QuestGenericProgress
 import loremipsumvirtualenterprise.quest.main.MainActivity
+import loremipsumvirtualenterprise.quest.util.SharedPreferencesHelper
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener
 {
@@ -129,6 +129,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
                 mProgress?.hide()
 
                 if (task.isSuccessful) {
+                    SharedPreferencesHelper.saveStringInSharedPreferences(this, SharedPreferencesHelper.USER_LOGGED, "YES")
                     val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
                     startActivity(mainActivityIntent)
                     OnboardingActivity.instance?.finish()
