@@ -21,6 +21,7 @@ import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -121,12 +122,11 @@ class CreateQuestActivity : AppCompatActivity()
     }
 
     // Helpers
-    @SuppressLint("NewApi")
     private fun currentDateTime(): String {
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-        val formatted = current.format(formatter)
-        return formatted
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
+//        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        val date : Date = Date()
+        return dateFormat.format(date)
     }
 
     // Actions

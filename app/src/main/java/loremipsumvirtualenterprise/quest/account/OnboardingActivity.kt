@@ -26,6 +26,10 @@ class OnboardingActivity : AppCompatActivity(), View.OnClickListener, ViewPager.
 {
     private var mLayouts = intArrayOf()
 
+    companion object {
+        var instance : OnboardingActivity? = null
+    }
+
     //region Overridden Methods
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,8 @@ class OnboardingActivity : AppCompatActivity(), View.OnClickListener, ViewPager.
 
         addBottomDots(0)
         changeStatusBarColor()
+
+        instance = this
     }
 
     override fun onClick(view: View?) {

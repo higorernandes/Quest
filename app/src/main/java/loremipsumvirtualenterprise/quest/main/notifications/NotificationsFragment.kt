@@ -3,12 +3,16 @@ package loremipsumvirtualenterprise.quest.main.notifications
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_main_notifications.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.MainGenericFragment
+import loremipsumvirtualenterprise.quest.model.Notification
 import loremipsumvirtualenterprise.quest.settings.SettingsActivity
 
 /**
@@ -18,6 +22,8 @@ class NotificationsFragment : MainGenericFragment()
 {
     //region Attributes
 
+    private var mNotifications : ArrayList<Notification> = ArrayList<Notification>()
+    private var mNotificationsAdapter : NotificationsArrayAdapter? = null
     private var mContext : Context? = null
 
     //endregion
@@ -40,7 +46,10 @@ class NotificationsFragment : MainGenericFragment()
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setUpToolbar()
+        prepareViews()
+        loadNotifications()
     }
 
     //endregion
@@ -62,6 +71,25 @@ class NotificationsFragment : MainGenericFragment()
         mainToolbarActionButton.setOnClickListener {
             startActivity(SettingsActivity.getActivityIntent(context))
         }
+    }
+
+    private fun prepareViews() {
+        mNotificationsAdapter = NotificationsArrayAdapter(context, mNotifications) {
+            // TODO: navigate to correct screen;
+        }
+        notificationsRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
+        notificationsRecyclerView.itemAnimator = DefaultItemAnimator()
+        notificationsRecyclerView.adapter = mNotificationsAdapter
+    }
+
+    private fun loadNotifications() {
+        mNotifications.add(Notification())
+        mNotifications.add(Notification())
+        mNotifications.add(Notification())
+        mNotifications.add(Notification())
+        mNotifications.add(Notification())
+        mNotifications.add(Notification())
+        mNotificationsAdapter?.notifyDataSetChanged()
     }
 
     //endregion

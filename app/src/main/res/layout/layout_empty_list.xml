@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingStart="@dimen/default_medium_margin"
+    android:paddingEnd="@dimen/default_medium_margin">
+
+    <!-- No internet icon -->
+    <ImageView
+        android:id="@+id/loading_indicator"
+        android:layout_width="@dimen/image_default_size"
+        android:layout_height="@dimen/image_default_size"/>
+
+    <!-- Greeting text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_medium_margin"
+        android:textSize="@dimen/font_size_large"
+        android:text="@string/no_internet_greeting"
+        android:textAlignment="center"
+        style="@style/QuestTextStyle"/>
+
+    <!-- No internet text -->
+    <TextView
+        android:id="@+id/no_internet_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/default_medium_margin"
+        android:text="@string/no_internet_text"
+        style="@style/SettingPrimaryInfoTextStyle"/>
+
+    <TextView
+        android:id="@+id/no_internet_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/no_internet_verify_connection"
+        style="@style/SettingPrimaryInfoTextStyle"/>
+
+    <Button
+        android:id="@+id/no_internet_reconnect_button"
+        android:layout_width="match_parent"
+        android:text="@string/generic_try_again"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_large_margin"
+        android:layout_marginBottom="@dimen/default_medium_margin"
+        style="@style/PrimaryButtonTheme"/>
+
+</LinearLayout>

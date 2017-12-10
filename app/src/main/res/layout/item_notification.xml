@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemNotificationRootView"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/notificationTimelineView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/default_medium_margin"
+        app:markerInCenter="true"
+        app:markerSize="16dp"
+        app:lineSize="1dp"
+        app:line="@color/colorDisabledText"
+        app:linePadding="5dp"
+        app:lineOrientation="vertical"
+        app:marker="@drawable/bg_marker" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/default_medium_margin"
+        android:layout_marginEnd="@dimen/default_medium_margin"
+        android:layout_marginTop="@dimen/default_medium_margin"
+        android:layout_toEndOf="@+id/notificationTimelineView">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Someone answered your question. hahahahahahahaha"
+            android:layout_marginBottom="@dimen/cardview_default_margin"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:theme="@style/QuestTextStyle"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5 minutes ago"
+            android:theme="@style/SecondaryInformationTheme" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:alpha="0.33"
+        android:background="@color/colorDisabledText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/cardview_large_margin"
+        android:layout_marginStart="48dp"/>
+
+</RelativeLayout>

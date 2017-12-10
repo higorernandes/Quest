@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
+import loremipsumvirtualenterprise.quest.generic.QuestGenericProgress
 import loremipsumvirtualenterprise.quest.main.MainActivity
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener
@@ -90,6 +91,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
         loginLoginButton.setOnClickListener(this)
         loginForgotPasswordButton.setOnClickListener(this)
         loginNoAccountButton.setOnClickListener(this)
+
+        mProgress = QuestGenericProgress(this)
     }
 
     private fun setUpToolbar() {
@@ -111,21 +114,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
 
     //endregion
 
+    private var mProgress: QuestGenericProgress? = null
+
     // Actions
     private fun doLogin() {
         if (areFieldsValid()){
             val email = loginLoginEditText!!.text.toString()
             val password = loginPasswordEditText!!.text.toString()
 
-            // TODO: Show Loader
+            mProgress?.show()
 
             firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
 
-                // TODO: Hide Loader
+                mProgress?.hide()
 
                 if (task.isSuccessful) {
                     val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
                     startActivity(mainActivityIntent)
+                    OnboardingActivity.instance?.finish()
+                    finish()
                 } else {
                     val message = task.exception?.getLocalizedMessage()
                     Toast.makeText(this@LoginActivity, "Houve um erro ao logar o usuário.\n" + message, Toast.LENGTH_SHORT).show()

@@ -18,6 +18,15 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- No internet/error layout -->
+    <include
+        android:id="@+id/emptyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout"
+        android:visibility="gone"
+        layout="@layout/layout_empty_list"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mainBoardRecyclerView"
         android:layout_width="match_parent"

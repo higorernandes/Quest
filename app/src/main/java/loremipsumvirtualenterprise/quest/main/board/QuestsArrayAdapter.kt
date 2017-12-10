@@ -1,13 +1,12 @@
 package loremipsumvirtualenterprise.quest.main.board
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.LayoutInflater.*
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.model.Quest
 
@@ -32,9 +31,15 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
     //region Overridden Methods
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {
-        var questItem: Quest = mObjects!![position]
+        val questItem: Quest = mObjects!![position]
 
-        holder?.itemBoardQuestRootView?.setOnClickListener { clickListener(questItem)}
+        holder?.itemQuestTitle?.text = questItem.title
+        holder?.itemQuestDescription?.text = questItem.description
+        holder?.itemQuestPublishDate?.text = questItem.publishedAt
+        holder?.itemQuestResponses?.text = mContext.resources.getString(R.string.board_item_responses_text)
+                .replace("{likes}", if (questItem.likes?.size == null) "0" else questItem.likes?.size.toString())
+                .replace("{responses}", if (questItem.responses?.size == null) "0" else questItem.responses?.size.toString())
+        holder?.itemQuestRootView?.setOnClickListener { clickListener(questItem)}
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
@@ -46,7 +51,7 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
         return if (mObjects != null) {
             mObjects!!.size
         } else {
-            0;
+            0
         }
     }
 
@@ -56,10 +61,20 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
 
     class Holder constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        var itemBoardQuestRootView : LinearLayout? = null
+        var itemQuestRootView: LinearLayout? = null
+        var itemQuestTitle: TextView? = null
+        var itemQuestDescription: TextView? = null
+        var itemQuestPublishDate: TextView? = null
+        var itemQuestAuthor : TextView? = null
+        var itemQuestResponses : TextView? = null
 
         init {
-            itemBoardQuestRootView = itemView.findViewById<LinearLayout>(R.id.itemBoardQuestRootView)
+            itemQuestRootView = itemView.findViewById<LinearLayout>(R.id.itemQuestRootView)
+            itemQuestTitle = itemView.findViewById<TextView>(R.id.itemQuestTitle)
+            itemQuestDescription = itemView.findViewById<TextView>(R.id.itemQuestDescription)
+            itemQuestPublishDate = itemView.findViewById<TextView>(R.id.itemQuestPublishDate)
+            itemQuestAuthor = itemView.findViewById<TextView>(R.id.itemQuestAuthor)
+            itemQuestResponses = itemView.findViewById<TextView>(R.id.itemQuestLikeResponsesCountTextView)
         }
     }
 
