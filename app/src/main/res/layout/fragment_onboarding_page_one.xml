@@ -17,6 +17,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/default_medium_margin"
             android:layout_marginTop="@dimen/default_large_margin"
+            android:src="@drawable/ic_doubt"
             />
 
     </LinearLayout>

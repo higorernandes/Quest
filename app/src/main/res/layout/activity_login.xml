@@ -35,12 +35,12 @@
 
         <!-- Logo -->
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/default_large_margin"
-            android:layout_marginTop="@dimen/default_medium_margin"
-            android:src="@drawable/ic_quest" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_logo" />
 
         <!-- Login field -->
         <android.support.design.widget.TextInputLayout
