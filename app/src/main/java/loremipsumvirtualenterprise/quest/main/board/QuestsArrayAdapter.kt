@@ -36,6 +36,7 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
         holder?.itemQuestTitle?.text = questItem.title
         holder?.itemQuestDescription?.text = questItem.description
         holder?.itemQuestPublishDate?.text = questItem.publishedAt
+//        holder?.itemQuestAuthor?.text
         holder?.itemQuestResponses?.text = mContext.resources.getString(R.string.board_item_responses_text)
                 .replace("{likes}", if (questItem.likes?.size == null) "0" else questItem.likes?.size.toString())
                 .replace("{responses}", if (questItem.responses?.size == null) "0" else questItem.responses?.size.toString())

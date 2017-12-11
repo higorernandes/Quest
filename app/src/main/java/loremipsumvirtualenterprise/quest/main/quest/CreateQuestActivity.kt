@@ -124,7 +124,6 @@ class CreateQuestActivity : AppCompatActivity()
     // Helpers
     private fun currentDateTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
-//        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
         val date : Date = Date()
         return dateFormat.format(date)
     }

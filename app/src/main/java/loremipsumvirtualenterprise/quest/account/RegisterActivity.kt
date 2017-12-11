@@ -1,5 +1,6 @@
 package loremipsumvirtualenterprise.quest.account
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -20,9 +21,15 @@ import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.main.MainActivity
+import loremipsumvirtualenterprise.quest.model.QuestUser
+import loremipsumvirtualenterprise.quest.util.FirebaseConstants
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterActivity : AppCompatActivity(){
 
@@ -39,6 +46,7 @@ class RegisterActivity : AppCompatActivity(){
 
     //Firebase references
     private var firebaseAuth: FirebaseAuth? = null
+    private var firebaseDatabaseReference: DatabaseReference? = null
 
     // Lifecycle
     companion object {
@@ -60,6 +68,7 @@ class RegisterActivity : AppCompatActivity(){
     // Initialization
     private fun initializeVariables() {
         firebaseAuth = FirebaseAuth.getInstance()
+        firebaseDatabaseReference = FirebaseDatabase.getInstance().reference
     }
 
     // Binding
@@ -136,7 +145,7 @@ class RegisterActivity : AppCompatActivity(){
                         // TODO: Stop Progress View
                         if (task.isSuccessful) {
                             Toast.makeText(this@RegisterActivity, "Usuário criado com sucesso.\nLogando...", Toast.LENGTH_SHORT).show()
-                            loginUser(email, password)
+                            loginUser(email, password, fullName)
                         } else {
                             val message = task.exception?.getLocalizedMessage()
                             Toast.makeText(this@RegisterActivity, "Houve um erro ao registrar o usuário.\n" + message, Toast.LENGTH_SHORT).show()
@@ -145,10 +154,29 @@ class RegisterActivity : AppCompatActivity(){
         }
     }
 
-    private fun loginUser(email: String, password: String) {
+    // Actions
+    @SuppressLint("NewApi")
+    private fun createQuestUserAndSaveToFirebase(email: String, name: String, uid: String) {
+        // Push to firebase in order to get the unique id
+        val newFirebaseQuestUser = firebaseDatabaseReference!!.child(FirebaseConstants.FIREBASE_USERS_NODE).push()
+
+        // Create and configure QuestUser object
+        val questUser = QuestUser.create()
+        questUser.email = email
+        questUser.name = name
+        questUser.uid = uid
+
+        // Set the value to the newFirebaseQuestItem
+        newFirebaseQuestUser.setValue(questUser)
+    }
+
+
+    private fun loginUser(email: String, password: String, fullName: String) {
         // TODO: Start Progress View
         firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                val uid = FirebaseAuth.getInstance().currentUser?.uid
+                createQuestUserAndSaveToFirebase(email, fullName, uid!!)
                 // TODO: Stop Progress View
                 val mainActivityIntent : Intent = MainActivity.getActivityIntent(this)
                 startActivity(mainActivityIntent)
@@ -159,6 +187,12 @@ class RegisterActivity : AppCompatActivity(){
         }
     }
 
+    // Helpers
+    private fun currentDateTime(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
+        val date : Date = Date()
+        return dateFormat.format(date)
+    }
 
     // Validation
     private fun areFieldsValid(): Boolean {

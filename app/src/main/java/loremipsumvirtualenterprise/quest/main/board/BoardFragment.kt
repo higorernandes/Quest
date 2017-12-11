@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_quest_detail.*
@@ -113,7 +114,12 @@ class BoardFragment : MainGenericFragment()
 //                questItem.responses = map.get("responses") as Array<QuestResponse>?
 
                 // add to list
-                mQuestsList.add(questItem)
+                val questItemPublisherUID = questItem.publisherUID
+                val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
+                if (questItemPublisherUID != null && currentUserUID != null && questItemPublisherUID.equals(currentUserUID)) {
+                    mQuestsList?.add(questItem)
+                }
+
             }
         }
 

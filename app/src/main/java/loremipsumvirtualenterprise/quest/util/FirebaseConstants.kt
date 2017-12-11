@@ -5,6 +5,7 @@ package loremipsumvirtualenterprise.quest.util
  */
 object FirebaseConstants {
 
-@JvmStatic val FIREBASE_QUESTS_NODE: String = "quests"
+    @JvmStatic val FIREBASE_USERS_NODE: String = "users"
+    @JvmStatic val FIREBASE_QUESTS_NODE: String = "quests"
 
 }

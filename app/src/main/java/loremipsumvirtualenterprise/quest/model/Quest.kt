@@ -1,6 +1,9 @@
 package loremipsumvirtualenterprise.quest.model
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 import java.util.*
 
 /**
@@ -20,5 +23,11 @@ class Quest {
     var publisherUID: String? = null
     var likes: ArrayList<QuestLike>? = null
     var responses: ArrayList<QuestResponse>? = null
+
+    // Move somewhere...
+
+//    fun getAuthorDetails() : QuestUser {
+//        FirebaseDatabase.getInstance().reference?.child(FirebaseConstants.FIREBASE_QUESTS_NODE)
+//    }
 
 }
