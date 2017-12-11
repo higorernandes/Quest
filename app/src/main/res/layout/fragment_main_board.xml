@@ -46,6 +46,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/default_medium_margin"
-        android:layout_marginBottom="@dimen/default_medium_margin"/>
+        android:layout_marginBottom="@dimen/default_medium_margin"
+        android:src="@drawable/ic_plus"/>
 
 </RelativeLayout>

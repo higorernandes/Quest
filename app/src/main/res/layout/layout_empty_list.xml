@@ -10,7 +10,8 @@
     <ImageView
         android:id="@+id/loading_indicator"
         android:layout_width="@dimen/image_default_size"
-        android:layout_height="@dimen/image_default_size"/>
+        android:layout_height="@dimen/image_default_size"
+        android:src="@drawable/ic_notconnection"/>
 
     <!-- Greeting text -->
     <TextView
