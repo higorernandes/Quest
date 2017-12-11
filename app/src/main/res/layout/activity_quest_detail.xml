@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- Toolbar -->
@@ -22,6 +21,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/appBarLayout"
         android:elevation="7dp">
 
         <LinearLayout
@@ -41,6 +41,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/questDetailTitleTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Como posso solicitar a segunda via da identidade acadêmica?"
@@ -49,6 +50,7 @@
                         android:theme="@style/QuestTextStyle"/>
 
                     <TextView
+                        android:id="@+id/questDetailDescriptionTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Perdi minha identidade acadêmica ontem à noite e não consigo encontrá-la. Em qual lugar da universidade devo ir para conseguir uma nova?"
@@ -63,7 +65,7 @@
                         android:layout_marginBottom="@dimen/cardview_small_margin">
 
                         <TextView
-                            android:id="@+id/questDateTextView"
+                            android:id="@+id/questDetailDateTextView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -78,7 +80,7 @@
                             android:gravity="end">
 
                             <EditText
-                                android:id="@+id/questAuthorTextView"
+                                android:id="@+id/questDetailAuthorTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
@@ -140,6 +142,15 @@
 
             </android.support.v7.widget.CardView>
 
+            <TextView
+                android:id="@+id/questDetailNoResponsesTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_no_responses_text"
+                android:layout_marginTop="@dimen/default_large_margin"
+                style="@style/SecondaryButtonTheme"
+                android:visibility="gone"/>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/questResponsesRecyclerView"
                 android:layout_width="match_parent"
@@ -152,4 +163,34 @@
 
     </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+
+        <EditText
+            android:id="@+id/questDetailResponseEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8.5"
+            android:layout_marginStart="@dimen/cardview_default_margin"
+            android:layout_gravity="center"
+            android:inputType="textPersonName"
+            android:theme="@style/WhiteEditTextTheme" />
+
+        <Button
+            android:id="@+id/questDetailSendResponseButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@drawable/ic_send"
+            android:backgroundTint="@color/colorDivider"
+            android:foreground="?attr/selectableItemBackground"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

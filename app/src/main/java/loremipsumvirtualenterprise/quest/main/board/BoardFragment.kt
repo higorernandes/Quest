@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.fragment_main_board.*
 import kotlinx.android.synthetic.main.layout_empty_list.*
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -24,6 +25,7 @@ import loremipsumvirtualenterprise.quest.main.quest.QuestDetailActivity
 import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
+import loremipsumvirtualenterprise.quest.util.NetworkHelper
 
 /**
  * Created by root on 2017-11-26.
@@ -78,7 +80,6 @@ class BoardFragment : MainGenericFragment()
 
     private fun loadDateFromSnapshot(dataSnapshot: DataSnapshot) {
 
-        mProgress?.show()
         val items = dataSnapshot.children.iterator()
         mQuestsList.clear()
 
@@ -118,8 +119,21 @@ class BoardFragment : MainGenericFragment()
 
         //alert adapter that has changed
         activity.runOnUiThread {
-            mProgress?.hide()
-            mQuestsAdapter?.notifyDataSetChanged()
+            if (mQuestsList.size == 0) {
+                emptyListGreetingTextView.text = resources.getString(R.string.board_no_items_greeting_text)
+                emptyListTextTextView.text = resources.getString(R.string.board_no_items_text)
+                emptyListSuggestionTextView.text = resources.getString(R.string.board_no_items_suggestion_text)
+                noInternetReconnectButton.visibility = View.GONE
+                emptyLayout.visibility = View.VISIBLE
+                mainBoardRecyclerView.visibility = View.GONE
+            } else {
+                mProgress?.hide()
+                mQuestsAdapter?.notifyDataSetChanged()
+                mainBoardRecyclerView.visibility = View.VISIBLE
+                noInternetReconnectButton.visibility = View.VISIBLE
+                emptyLayout.visibility = View.GONE
+                boardFloatingActionButton.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -131,10 +145,19 @@ class BoardFragment : MainGenericFragment()
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!NetworkHelper.isConnected) {
+            noInternetReconnectButton.visibility = View.VISIBLE
+            emptyLayout.visibility = View.VISIBLE
+            mainBoardRecyclerView.visibility = View.GONE
+            boardFloatingActionButton.visibility = View.GONE
+        }
+
         initViews()
         initializeVariables()
         configureListeners()
         setUpToolbar()
+        mProgress?.show()
     }
 
     override fun onFragmentReselected() { }
@@ -153,7 +176,7 @@ class BoardFragment : MainGenericFragment()
         mainBoardRecyclerView.itemAnimator = DefaultItemAnimator()
         mainBoardRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
         mQuestsAdapter =  QuestsArrayAdapter(context, mQuestsList) { item: Quest ->
-            startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!))
+            startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!, item.title!!, item.description!!, item.publishedAt!!, item.publisherUID!!, item.likes, item.responses))
         }
         mainBoardRecyclerView.adapter = mQuestsAdapter
 

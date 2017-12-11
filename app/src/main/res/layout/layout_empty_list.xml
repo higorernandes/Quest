@@ -14,6 +14,7 @@
 
     <!-- Greeting text -->
     <TextView
+        android:id="@+id/emptyListGreetingTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_medium_margin"
@@ -24,7 +25,7 @@
 
     <!-- No internet text -->
     <TextView
-        android:id="@+id/no_internet_text"
+        android:id="@+id/emptyListTextTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -33,7 +34,7 @@
         style="@style/SettingPrimaryInfoTextStyle"/>
 
     <TextView
-        android:id="@+id/no_internet_suggestion"
+        android:id="@+id/emptyListSuggestionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"

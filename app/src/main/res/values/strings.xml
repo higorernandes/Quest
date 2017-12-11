@@ -9,6 +9,7 @@
     <string name="no_internet_text">Parece que você está sem internet :(</string>
     <string name="no_internet_verify_connection">Verifique sua conexão e tente novamente!</string>
     <string name="generic_try_again">Tentar novamente</string>
+    <string name="generic_username">\@{username}</string>
 
     <!-- Onboarding -->
     <string name="onboarding_title_page_one">Tire dúvidas</string>
@@ -46,6 +47,11 @@
     <string name="cadastro">Cadastro</string>
     <string name="board_item_responses_text">{likes} likes • {responses} respostas</string>
 
+    <!-- Board -->
+    <string name="board_no_items_greeting_text">Sem itens no momento.</string>
+    <string name="board_no_items_text">Não há nenhuma pergunta na sua área no moment.</string>
+    <string name="board_no_items_suggestion_text">Que tal começar fazendo uma nova pergunta?</string>
+
     <!-- Create Quest-->
     <string name="create_new_quest">Nova Quest</string>
     <string name="create_quest_button_text">Criar Quest</string>
@@ -65,5 +71,6 @@
 
     <!-- Details -->
     <string name="detail_title">Detalhes</string>
+    <string name="detail_no_responses_text">Ainda não há respostas para esta pergunta.</string>
 
 </resources>

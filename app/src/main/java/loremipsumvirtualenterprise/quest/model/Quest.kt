@@ -18,7 +18,7 @@ class Quest {
     var description: String? = null
     var publishedAt: String? = null
     var publisherUID: String? = null
-    var likes: Array<QuestLike>? = null
-    var responses: Array<QuestResponse>? = null
+    var likes: ArrayList<QuestLike>? = null
+    var responses: ArrayList<QuestResponse>? = null
 
 }
