@@ -146,18 +146,19 @@ class BoardFragment : MainGenericFragment()
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
+        initializeVariables()
+        configureListeners()
+        setUpToolbar()
         if (!NetworkHelper.isConnected) {
             noInternetReconnectButton.visibility = View.VISIBLE
             emptyLayout.visibility = View.VISIBLE
             mainBoardRecyclerView.visibility = View.GONE
             boardFloatingActionButton.visibility = View.GONE
+            mProgress?.hide()
+        } else {
+            mProgress?.hide()
         }
-
-        initViews()
-        initializeVariables()
-        configureListeners()
-        setUpToolbar()
-        mProgress?.show()
     }
 
     override fun onFragmentReselected() { }
