@@ -24,10 +24,11 @@ class Quest {
     var likes: ArrayList<QuestLike>? = null
     var responses: ArrayList<QuestResponse>? = null
 
-    // Move somewhere...
-
-//    fun getAuthorDetails() : QuestUser {
-//        FirebaseDatabase.getInstance().reference?.child(FirebaseConstants.FIREBASE_QUESTS_NODE)
-//    }
+    // Move somewhere else?
+    fun getAuthor() : QuestUser? {
+        if (this.publisherUID != null) {
+            return FirebaseDatabase.getInstance().reference?.child(FirebaseConstants.FIREBASE_QUESTS_NODE)?.child(this.publisherUID!!) as QuestUser?
+        } else { return null }
+    }
 
 }
