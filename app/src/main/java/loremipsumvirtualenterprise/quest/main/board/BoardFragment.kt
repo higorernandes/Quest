@@ -104,9 +104,9 @@ class BoardFragment : MainGenericFragment()
                 // add to list
                 val questItemPublisherUID = questItem.publisherUID
                 val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
-                if (questItemPublisherUID != null && currentUserUID != null && questItemPublisherUID.equals(currentUserUID)) {
+//                if (questItemPublisherUID != null && currentUserUID != null && questItemPublisherUID.equals(currentUserUID)) {
                     mQuestsList?.add(questItem)
-                }
+//                }
 
             }
         }
