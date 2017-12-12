@@ -99,19 +99,7 @@ class BoardFragment : MainGenericFragment()
 
                 //get current item
                 val currentItem = itemsIterator.next()
-                val questItem = Quest.create()
-
-                //get current data in a map
-                val map = currentItem.value as HashMap<*, *>
-
-                //key will return Firebase ID
-                questItem.id = currentItem.key
-                questItem.title = map.get("title") as String?
-                questItem.description = map.get("description") as String?
-                questItem.publishedAt = map.get("publishedAt") as String?
-                questItem.publisherUID = map.get("publisherUID") as String?
-//                questItem.likes = map.get("likes") as Array<QuestLike>?
-//                questItem.responses = map.get("responses") as Array<QuestResponse>?
+                val questItem = Quest.createFromDataSnapshot(currentItem)
 
                 // add to list
                 val questItemPublisherUID = questItem.publisherUID

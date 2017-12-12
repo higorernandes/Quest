@@ -7,8 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.model.Quest
+import loremipsumvirtualenterprise.quest.model.QuestUser
+import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 
 /**
  * Created by root on 2017-11-27.
@@ -36,7 +42,7 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
         holder?.itemQuestTitle?.text = questItem.title
         holder?.itemQuestDescription?.text = questItem.description
         holder?.itemQuestPublishDate?.text = questItem.publishedAt
-        holder?.itemQuestAuthor?.text = questItem.getAuthor()?.name
+//        loadAuthorForHolder(holder, questItem)
         holder?.itemQuestResponses?.text = mContext.resources.getString(R.string.board_item_responses_text)
                 .replace("{likes}", if (questItem.likes?.size == null) "0" else questItem.likes?.size.toString())
                 .replace("{responses}", if (questItem.responses?.size == null) "0" else questItem.responses?.size.toString())
@@ -57,6 +63,18 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
     }
 
     //endregion
+
+    // Helpers
+    fun loadAuthorForHolder(holder: Holder?, quest: Quest) {
+        val publisherDatabaseReference = FirebaseDatabase.getInstance().reference?.child(FirebaseConstants.FIREBASE_QUESTS_NODE)?.child(quest.publisherUID!!)
+        val dataSnapshot = publisherDatabaseReference?.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val questUser = QuestUser.createFromDataSnapshot(snapshot)
+                holder?.itemQuestAuthor?.text = "@" + questUser.name
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
 
     //region Inner Class
 
