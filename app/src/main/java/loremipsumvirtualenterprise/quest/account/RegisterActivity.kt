@@ -28,6 +28,7 @@ import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.main.MainActivity
 import loremipsumvirtualenterprise.quest.model.QuestUser
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
+import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -46,7 +47,6 @@ class RegisterActivity : AppCompatActivity(){
 
     //Firebase references
     private var firebaseAuth: FirebaseAuth? = null
-    private var firebaseDatabaseReference: DatabaseReference? = null
 
     // Lifecycle
     companion object {
@@ -68,7 +68,6 @@ class RegisterActivity : AppCompatActivity(){
     // Initialization
     private fun initializeVariables() {
         firebaseAuth = FirebaseAuth.getInstance()
-        firebaseDatabaseReference = FirebaseDatabase.getInstance().reference
     }
 
     // Binding
@@ -157,17 +156,14 @@ class RegisterActivity : AppCompatActivity(){
     // Actions
     @SuppressLint("NewApi")
     private fun createQuestUserAndSaveToFirebase(email: String, name: String, uid: String) {
-        // Push to firebase in order to get the unique id
-        val newFirebaseQuestUser = firebaseDatabaseReference!!.child(FirebaseConstants.FIREBASE_USERS_NODE).push()
-
         // Create and configure QuestUser object
         val questUser = QuestUser.create()
         questUser.email = email
         questUser.name = name
         questUser.uid = uid
 
-        // Set the value to the newFirebaseQuestItem
-        newFirebaseQuestUser.setValue(questUser)
+        // Set the value to the
+        FirebaseDatabaseUtil.usersNode?.setValue(questUser)
     }
 
 

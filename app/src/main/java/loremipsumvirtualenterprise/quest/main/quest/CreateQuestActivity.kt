@@ -21,6 +21,7 @@ import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
+import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -38,9 +39,6 @@ class CreateQuestActivity : AppCompatActivity()
     private var questDescriptionEditText: EditText? = null
     private var createQuestButton: Button? = null
 
-    //Firebase references
-    private var firebaseDatabaseReference: DatabaseReference? = null
-
     // Constructor
     companion object {
         fun getActivityIntent(context: Context) : Intent {
@@ -52,15 +50,9 @@ class CreateQuestActivity : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quest)
-        initializeVariables()
         bindUIElements()
         configureUIElements()
         configureListeners()
-    }
-
-    // Initialization
-    private fun initializeVariables() {
-        firebaseDatabaseReference = FirebaseDatabase.getInstance().reference
     }
 
     // Binding
@@ -135,18 +127,18 @@ class CreateQuestActivity : AppCompatActivity()
         if (areFieldsValid()) {
 
             // Push to firebase in order to get the unique id
-            val newFirebaseQuestItem = firebaseDatabaseReference!!.child(FirebaseConstants.FIREBASE_QUESTS_NODE).push()
+            val newFirebaseQuestItem = FirebaseDatabaseUtil.questsNode?.push()
 
             // Create and configure Quest object
             val quest = Quest.create()
-            quest.id = newFirebaseQuestItem.key
+            quest.id = newFirebaseQuestItem?.key
             quest.title = questTitleEditText?.text.toString()
             quest.description = questDescriptionEditText?.text.toString()
             quest.publishedAt = currentDateTime()
             quest.publisherUID = FirebaseAuth.getInstance().currentUser!!.uid
 
             // Set the value to the newFirebaseQuestItem
-            newFirebaseQuestItem.setValue(quest)
+            newFirebaseQuestItem?.setValue(quest)
 
             // Dismiss activity and show success dialog
             finish()
