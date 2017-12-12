@@ -156,14 +156,17 @@ class RegisterActivity : AppCompatActivity(){
     // Actions
     @SuppressLint("NewApi")
     private fun createQuestUserAndSaveToFirebase(email: String, name: String, uid: String) {
+        // Push to firebase in order to get the unique id
+        val newFirebaseQuestUser = FirebaseDatabaseUtil.usersNode?.child(uid)
+
         // Create and configure QuestUser object
         val questUser = QuestUser.create()
         questUser.email = email
         questUser.name = name
         questUser.uid = uid
 
-        // Set the value to the
-        FirebaseDatabaseUtil.usersNode?.setValue(questUser)
+        // Set the value to the newFirebaseQuestItem
+        newFirebaseQuestUser?.setValue(questUser)
     }
 
 

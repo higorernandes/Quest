@@ -69,10 +69,9 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
     // Helpers
     fun loadAuthorForHolder(holder: Holder?, quest: Quest) {
 
-        val publisherUID = quest.publisherUID
-        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        val publisherDatabaseReference = FirebaseDatabaseUtil.usersNode?.child(quest.publisherUID!!)
 
-        FirebaseDatabaseUtil.usersNode?.child(quest.publisherUID!!)?.addListenerForSingleValueEvent(object : ValueEventListener {
+        publisherDatabaseReference?.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.value != null) {
                     val questUser = QuestUser.createFromDataSnapshot(snapshot)
@@ -81,6 +80,7 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
             }
             override fun onCancelled(error: DatabaseError) {}
         })
+
     }
 
     //region Inner Class
