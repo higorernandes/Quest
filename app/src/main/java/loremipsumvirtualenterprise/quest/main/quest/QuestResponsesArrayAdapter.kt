@@ -28,7 +28,7 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
     //region Overridden Methods
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {
-        val questItem: String = mObjects!![position]
+//        val questItem: String = mObjects!![position]
 
         Glide.with(mContext)
                 .load("https://vignette.wikia.nocookie.net/rickandmorty/images/8/8f/Rickk22.png")

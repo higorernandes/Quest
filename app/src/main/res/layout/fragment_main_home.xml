@@ -12,11 +12,32 @@
         android:background="@android:color/white">
 
         <include
-            android:id="@+id/mainToolbar"
+            android:id="@+id/homeMainToolbar"
             layout="@layout/toolbar_main"
             android:elevation="7dp" />
 
     </android.support.design.widget.AppBarLayout>
+
+    <!-- No internet/error layout -->
+    <include
+        android:id="@+id/homeEmptyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout"
+        android:visibility="gone"
+        layout="@layout/layout_empty_list"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainHomeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/cardview_small_margin"
+        android:layout_marginBottom="@dimen/cardview_default_margin"
+        android:overScrollMode="never"
+        android:layout_below="@+id/appBarLayout"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="30dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mainHomeFloatingActionButton"

@@ -28,7 +28,7 @@ class ChatsArrayAdapter constructor(context: Context, objects: ArrayList<Chat>?,
     //region Overridden Methods
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {
-        var questItem: Chat = mObjects!![position]
+//        var questItem: Chat = mObjects!![position]
 
         Glide.with(mContext)
                 .load("https://vignette.wikia.nocookie.net/rickandmorty/images/8/8f/Rickk22.png")

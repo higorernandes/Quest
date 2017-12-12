@@ -26,6 +26,7 @@ import loremipsumvirtualenterprise.quest.main.quest.QuestDetailActivity
 import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
+import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import loremipsumvirtualenterprise.quest.util.NetworkHelper
 
 /**
@@ -35,9 +36,6 @@ class BoardFragment : MainGenericFragment()
 {
     // Constants
     private val TAG = "BoardFragment"
-
-    //Firebase references
-    private var firebaseDatabaseReference: DatabaseReference? = null
 
     // Properties
     private var mContext : Context? = null
@@ -54,14 +52,11 @@ class BoardFragment : MainGenericFragment()
         }
     }
 
-    // Initialization
-    private fun initializeVariables() {
-        firebaseDatabaseReference = FirebaseDatabase.getInstance().reference
-    }
-
     // Listeners
     private fun configureListeners() {
-        firebaseDatabaseReference!!.orderByKey().addListenerForSingleValueEvent(questItemsListener)
+        if (FirebaseDatabaseUtil.questsNode != null) {
+            FirebaseDatabaseUtil.questsNode.orderByKey().addValueEventListener(questItemsListener)
+        }
     }
 
     var questItemsListener: ValueEventListener = object : ValueEventListener {
@@ -91,8 +86,8 @@ class BoardFragment : MainGenericFragment()
 
         //Check if current database contains any collection
         if (items.hasNext()) {
-            val questListIndex = items.next()
-            val itemsIterator = questListIndex.children.iterator()
+
+            val itemsIterator = items.iterator()
 
             //check if the collection has any to do items or not
             while (itemsIterator.hasNext()) {
@@ -102,11 +97,7 @@ class BoardFragment : MainGenericFragment()
                 val questItem = Quest.createFromDataSnapshot(currentItem)
 
                 // add to list
-                val questItemPublisherUID = questItem.publisherUID
-                val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
-//                if (questItemPublisherUID != null && currentUserUID != null && questItemPublisherUID.equals(currentUserUID)) {
-                    mQuestsList?.add(questItem)
-//                }
+                mQuestsList.add(questItem)
 
             }
         }
@@ -139,9 +130,7 @@ class BoardFragment : MainGenericFragment()
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews()
-        initializeVariables()
         configureListeners()
         setUpToolbar()
         if (!NetworkHelper.isConnected) {
@@ -176,10 +165,9 @@ class BoardFragment : MainGenericFragment()
         mainBoardRecyclerView.adapter = mQuestsAdapter
 
         boardFloatingActionButton.setOnClickListener { startActivity(CreateQuestActivity.getActivityIntent(context)) }
-        noInternetReconnectButton.setOnClickListener {
-            initializeVariables()
-            configureListeners()
-        }
+//        noInternetReconnectButton.setOnClickListener {
+//            configureListeners()
+//        }
     }
 
 }
