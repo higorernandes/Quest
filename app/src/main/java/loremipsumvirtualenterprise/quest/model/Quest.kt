@@ -32,7 +32,15 @@ class Quest {
             questItem.publishedAt = map.get("publishedAt") as String?
             questItem.publisherUID = map.get("publisherUID") as String?
             questItem.likes = map.get("likes") as ArrayList<QuestLike>?
-            questItem.responses = map.get("responses") as ArrayList<QuestResponse>?
+
+            questItem.responses = ArrayList<QuestResponse>()
+            val responseItems = map.get("responses") as ArrayList<Map<String, Any>>
+            for (responseItem in responseItems) {
+                var response = QuestResponse.create()
+                response.userUid = responseItem.get("userUid") as String?
+                response.text = responseItem.get("text") as String?
+                questItem!!.responses!!.add(response)
+            }
 
             return questItem
         }

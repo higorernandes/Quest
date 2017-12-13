@@ -25,6 +25,7 @@ import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
 import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
+import loremipsumvirtualenterprise.quest.model.QuestUser
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 
 class QuestDetailActivity : QuestGenericActivity(), TextWatcher
@@ -147,10 +148,10 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         questDetailTitleTextView.text = mQuest?.title
         questDetailDescriptionTextView.text = mQuest?.description
         questDetailDateTextView.text = mQuest?.publishedAt
-//        questDetailAuthorTextView.setText(resources.getString(R.string.generic_username).replace("{username}", intent.getStringExtra(QUEST_AUTHOR)))
-//        questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
-//                .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
-//                .replace("{responses}", if (mQuest?.responses != null) mQuest?.responses?.size.toString() else "0")
+        loadAuthor()
+        questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
+                .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
+                .replace("{responses}", if (mQuest?.responses != null) mQuest?.responses?.size.toString() else "0")
 
         mResponses = mQuest?.responsesAsStringArray()!!
 
@@ -164,6 +165,23 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
             questResponsesRecyclerView.visibility = View.VISIBLE
         }
         updateResponsesCounterText()
+    }
+
+    // Helpers
+    fun loadAuthor() {
+
+        val publisherDatabaseReference = FirebaseDatabaseUtil.usersNode?.child(mQuest?.publisherUID!!)
+
+        publisherDatabaseReference?.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.value != null) {
+                    val questUser = QuestUser.createFromDataSnapshot(snapshot)
+                    questDetailAuthorEditText.setText(resources.getString(R.string.generic_username).replace("{username}", questUser.name.toString()))
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+
     }
 
     private fun updateResponsesCounterText() {
