@@ -32,7 +32,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 {
     //region Attributes
 
-    private var mResponses: ArrayList<String> = ArrayList<String>()
+    private var mResponses: ArrayList<QuestResponse> = ArrayList<QuestResponse>()
     private var mQuestResponsesArrayAdapter: QuestResponsesArrayAdapter? = null
     private var mQuest : Quest? = null
 
@@ -86,7 +86,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
     //region Private Methods
 
     private fun initViews() {
-        mQuestResponsesArrayAdapter = QuestResponsesArrayAdapter(this, mResponses,
+        mQuestResponsesArrayAdapter = QuestResponsesArrayAdapter(this, mResponses!!,
                 downvoteClickListener = {
                     //TODO: call service to register downvoting
                 }, upvoteClickListener = {
@@ -153,11 +153,11 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
                 .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
                 .replace("{responses}", if (mQuest?.responses != null) mQuest?.responses?.size.toString() else "0")
 
-        mResponses = mQuest?.responsesAsStringArray()!!
+        mResponses = mQuest?.responses ?: ArrayList<QuestResponse>() //mQuest?.responsesAsStringArray()!!
 
         mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 
-        if (mResponses.size == 0) {
+        if (mResponses?.size == 0) {
             questDetailNoResponsesTextView.visibility = View.VISIBLE
             questResponsesRecyclerView.visibility = View.GONE
         } else {

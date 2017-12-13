@@ -12,24 +12,24 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import loremipsumvirtualenterprise.quest.R
+import loremipsumvirtualenterprise.quest.model.QuestResponse
 
 /**
  * Created by root on 2017-12-10.
  */
-class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayList<String>, private val upvoteClickListener: (String) -> Unit, private val downvoteClickListener: (String) -> Unit) : RecyclerView.Adapter<QuestResponsesArrayAdapter.Holder>()
+class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayList<QuestResponse>, private val upvoteClickListener: (String) -> Unit, private val downvoteClickListener: (String) -> Unit) : RecyclerView.Adapter<QuestResponsesArrayAdapter.Holder>()
 {
     //region Attributes
 
     private var mContext : Context = context
-    private var mObjects : ArrayList<String>? = objects
+    private var mObjects : ArrayList<QuestResponse>? = objects
 
     //endregion
 
     //region Overridden Methods
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {
-//        val questItem: String = mObjects!![position]
-
+        val questResponse: QuestResponse = mObjects!![position]
         Glide.with(mContext)
                 .load("https://vignette.wikia.nocookie.net/rickandmorty/images/8/8f/Rickk22.png")
                 .apply(RequestOptions.circleCropTransform())
