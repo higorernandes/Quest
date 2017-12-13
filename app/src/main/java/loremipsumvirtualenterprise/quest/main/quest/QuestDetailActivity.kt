@@ -15,6 +15,9 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
@@ -28,7 +31,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 {
     //region Attributes
 
-    private val mResponses: ArrayList<String> = ArrayList<String>()
+    private var mResponses: ArrayList<String> = ArrayList<String>()
     private var mQuestResponsesArrayAdapter: QuestResponsesArrayAdapter? = null
     private var mQuest : Quest? = null
 
@@ -38,25 +41,9 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
     companion object {
         private val QUEST_ID: String = "QUEST_ID"
-        private val QUEST_TITLE: String = "QUEST_TITLE"
-        private val QUEST_DESCRIPTION: String = "QUEST_DESCRIPTION"
-        private val QUEST_DATE: String = "QUEST_DATE"
-        private val QUEST_AUTHOR: String = "QUEST_AUTHOR"
-        private val QUEST_AUTHOR_ID: String = "QUEST_AUTHOR_ID"
-        private val QUEST_LIKES: String = "QUEST_LIKES"
-        private val QUEST_RESPONSES: String = "QUEST_RESPONSES"
-
-        fun getActivityIntent(context: Context, questId: String, title: String, description: String, date: String, /*author:String,*/ authorId:String, likes: ArrayList<QuestLike>?, responses: ArrayList<QuestResponse>?) : Intent {
+        fun getActivityIntent(context: Context, questId: String) : Intent {
             val intent = Intent(context, QuestDetailActivity::class.java)
             intent.putExtra(QUEST_ID, questId)
-            intent.putExtra(QUEST_TITLE, title)
-            intent.putExtra(QUEST_DESCRIPTION, description)
-            intent.putExtra(QUEST_DATE, date)
-//            intent.putExtra(QUEST_AUTHOR, author)
-            intent.putExtra(QUEST_AUTHOR_ID, authorId)
-            intent.putParcelableArrayListExtra(QUEST_LIKES, likes)
-            intent.putParcelableArrayListExtra(QUEST_RESPONSES, responses)
-
             return intent
         }
     }
@@ -68,12 +55,10 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quest_detail)
-
-        getExtras()
         changeStatusBarColor()
         setUpToolbar(questDetailToolbar as Toolbar, resources.getString(R.string.detail_title))
         initViews()
-        loadQuest()
+        getExtrasAndLoadQuestData()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -126,32 +111,48 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
                 val questAsMap = mQuest?.asMap()
 
                 FirebaseDatabaseUtil.questsNode?.child(mQuest?.id)?.updateChildren(questAsMap)
+
+                questDetailResponseEditText.text = null
             }
 
         }
     }
 
-    private fun getExtras() {
-        mQuest = Quest.create()
-        mQuest!!.id = intent.getStringExtra(QUEST_ID)
-        mQuest!!.title = intent.getStringExtra(QUEST_TITLE)
-        mQuest!!.description = intent.getStringExtra(QUEST_DESCRIPTION)
-        mQuest!!.publishedAt = intent.getStringExtra(QUEST_DATE)
-        mQuest!!.publisherUID = intent.getStringExtra(QUEST_AUTHOR_ID)
-        val likesCounter = intent.getParcelableArrayListExtra<QuestLike>(QUEST_LIKES)
-        val responsesCounter = intent.getParcelableArrayListExtra<QuestLike>(QUEST_RESPONSES)
-        questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
-                .replace("{likes}", if (likesCounter != null) likesCounter.toString() else "0")
-                .replace("{responses}", if (responsesCounter != null) responsesCounter.toString() else "0")
+    // Listeners
+    private fun configureListenerForQuestWithID(questId: String) {
+        if (FirebaseDatabaseUtil.questsNode != null) {
+            FirebaseDatabaseUtil.questsNode.child(questId).addValueEventListener(questItemListener)
+        }
     }
 
-    private fun loadQuest() {
+    var questItemListener: ValueEventListener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            loadQuestFromDataSnapshot(dataSnapshot)
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {}
+    }
+
+    private fun getExtrasAndLoadQuestData() {
+        val questID = intent.getStringExtra(QUEST_ID)
+        configureListenerForQuestWithID(questID)
+    }
+
+    private fun loadQuestFromDataSnapshot(snapshot: DataSnapshot) {
+
+        mQuest = Quest.createFromDataSnapshot(snapshot)
+        mQuest?.id = snapshot.key
 
         //  configure view with quest data
         questDetailTitleTextView.text = mQuest?.title
         questDetailDescriptionTextView.text = mQuest?.description
         questDetailDateTextView.text = mQuest?.publishedAt
 //        questDetailAuthorTextView.setText(resources.getString(R.string.generic_username).replace("{username}", intent.getStringExtra(QUEST_AUTHOR)))
+//        questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
+//                .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
+//                .replace("{responses}", if (mQuest?.responses != null) mQuest?.responses?.size.toString() else "0")
+
+        mResponses = mQuest?.responsesAsStringArray()!!
 
         mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 

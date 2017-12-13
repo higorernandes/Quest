@@ -24,7 +24,7 @@ class QuestLike() : Parcelable
 
     companion object CREATOR : Parcelable.Creator<QuestLike> {
         override fun createFromParcel(parcel: Parcel): QuestLike {
-            return QuestLike(parcel)
+           return QuestLike(parcel)
         }
 
         override fun newArray(size: Int): Array<QuestLike?> {

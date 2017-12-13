@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 /**
@@ -56,6 +57,20 @@ class Quest {
         map.put("responses", this.responses)
 
         return map
+    }
+
+    fun responsesAsStringArray() : ArrayList<String> {
+
+        var stringArray = ArrayList<String>()
+
+        if (this.responses != null) {
+            for (response in this.responses!!) {
+                stringArray.add(response.text!!)
+            }
+        }
+
+        return stringArray
+
     }
 
 }

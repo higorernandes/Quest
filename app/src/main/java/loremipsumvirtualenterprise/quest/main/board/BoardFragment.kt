@@ -160,7 +160,7 @@ class BoardFragment : MainGenericFragment()
         mainBoardRecyclerView.itemAnimator = DefaultItemAnimator()
         mainBoardRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
         mQuestsAdapter =  QuestsArrayAdapter(context, mQuestsList) { item: Quest ->
-            startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!, item.title!!, item.description!!, item.publishedAt!!, item.publisherUID!!, item.likes, item.responses))
+            startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!))
         }
         mainBoardRecyclerView.adapter = mQuestsAdapter
 
