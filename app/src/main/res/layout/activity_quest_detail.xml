@@ -80,7 +80,6 @@
                             android:gravity="end">
 
                             <EditText
-                                android:id="@+id/questDetailAuthorTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="end"

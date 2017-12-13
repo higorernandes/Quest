@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Created by root on 2017-11-27.
@@ -29,8 +30,8 @@ class Quest {
             questItem.description = map.get("description") as String?
             questItem.publishedAt = map.get("publishedAt") as String?
             questItem.publisherUID = map.get("publisherUID") as String?
-//                questItem.likes = map.get("likes") as Array<QuestLike>?
-//                questItem.responses = map.get("responses") as Array<QuestResponse>?
+            questItem.likes = map.get("likes") as ArrayList<QuestLike>?
+            questItem.responses = map.get("responses") as ArrayList<QuestResponse>?
 
             return questItem
         }
@@ -43,5 +44,18 @@ class Quest {
     var publisherUID: String? = null
     var likes: ArrayList<QuestLike>? = null
     var responses: ArrayList<QuestResponse>? = null
+
+    fun asMap(): Map<String, Any?> {
+
+        var map = HashMap<String, Any?>()
+        map.put("title", this.title)
+        map.put("description", this.description)
+        map.put("publishedAt", this.publishedAt)
+        map.put("publisherUID", this.publisherUID)
+        map.put("likes", this.likes)
+        map.put("responses", this.responses)
+
+        return map
+    }
 
 }

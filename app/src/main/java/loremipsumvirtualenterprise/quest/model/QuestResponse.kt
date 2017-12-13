@@ -23,6 +23,7 @@ class QuestResponse() : Parcelable
     }
 
     companion object CREATOR : Parcelable.Creator<QuestResponse> {
+
         override fun createFromParcel(parcel: Parcel): QuestResponse {
             return QuestResponse(parcel)
         }
@@ -30,5 +31,11 @@ class QuestResponse() : Parcelable
         override fun newArray(size: Int): Array<QuestResponse?> {
             return arrayOfNulls(size)
         }
+
+        fun create(): QuestResponse = QuestResponse()
     }
+
+    var userUid: String? = null
+    var text: String? = null
+
 }

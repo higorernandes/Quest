@@ -14,12 +14,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
+import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
+import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 
 class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 {
@@ -27,7 +30,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
     private val mResponses: ArrayList<String> = ArrayList<String>()
     private var mQuestResponsesArrayAdapter: QuestResponsesArrayAdapter? = null
-    private var mQuestId : Int? = null
+    private var mQuest : Quest? = null
 
     //endregion
 
@@ -39,16 +42,18 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         private val QUEST_DESCRIPTION: String = "QUEST_DESCRIPTION"
         private val QUEST_DATE: String = "QUEST_DATE"
         private val QUEST_AUTHOR: String = "QUEST_AUTHOR"
+        private val QUEST_AUTHOR_ID: String = "QUEST_AUTHOR_ID"
         private val QUEST_LIKES: String = "QUEST_LIKES"
         private val QUEST_RESPONSES: String = "QUEST_RESPONSES"
 
-        fun getActivityIntent(context: Context, questId: String, title: String, description: String, date: String, author:String, likes: ArrayList<QuestLike>?, responses: ArrayList<QuestResponse>?) : Intent {
+        fun getActivityIntent(context: Context, questId: String, title: String, description: String, date: String, /*author:String,*/ authorId:String, likes: ArrayList<QuestLike>?, responses: ArrayList<QuestResponse>?) : Intent {
             val intent = Intent(context, QuestDetailActivity::class.java)
             intent.putExtra(QUEST_ID, questId)
             intent.putExtra(QUEST_TITLE, title)
             intent.putExtra(QUEST_DESCRIPTION, description)
             intent.putExtra(QUEST_DATE, date)
-            intent.putExtra(QUEST_AUTHOR, author)
+//            intent.putExtra(QUEST_AUTHOR, author)
+            intent.putExtra(QUEST_AUTHOR_ID, authorId)
             intent.putParcelableArrayListExtra(QUEST_LIKES, likes)
             intent.putParcelableArrayListExtra(QUEST_RESPONSES, responses)
 
@@ -106,18 +111,33 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         questResponsesRecyclerView.adapter = mQuestResponsesArrayAdapter
         questDetailResponseEditText.addTextChangedListener(this)
         questDetailSendResponseButton.setOnClickListener {
-            //TODO: call service to save comment
+            if (questDetailResponseEditText.text != null) {
+
+                var questResponse = QuestResponse.create()
+                questResponse.userUid = FirebaseAuth.getInstance().currentUser?.uid
+                questResponse.text = questDetailResponseEditText.text.toString()
+
+                if(mQuest?.responses == null){
+                    mQuest?.responses = ArrayList<QuestResponse>()
+                }
+
+                mQuest?.responses?.add(questResponse)
+
+                val questAsMap = mQuest?.asMap()
+
+                FirebaseDatabaseUtil.questsNode?.child(mQuest?.id)?.updateChildren(questAsMap)
+            }
+
         }
     }
 
     private fun getExtras() {
-        mQuestId = intent.getIntExtra(QUEST_ID, 0)
-        questDetailTitleTextView.text = intent.getStringExtra(QUEST_TITLE)
-        questDetailDescriptionTextView.text = intent.getStringExtra(QUEST_DESCRIPTION)
-        questDetailDateTextView.text = intent.getStringExtra(QUEST_DATE)
-        questDetailAuthorTextView.setText(resources.getString(R.string.generic_username)
-                .replace("{username}", intent.getStringExtra(QUEST_AUTHOR)))
-
+        mQuest = Quest.create()
+        mQuest!!.id = intent.getStringExtra(QUEST_ID)
+        mQuest!!.title = intent.getStringExtra(QUEST_TITLE)
+        mQuest!!.description = intent.getStringExtra(QUEST_DESCRIPTION)
+        mQuest!!.publishedAt = intent.getStringExtra(QUEST_DATE)
+        mQuest!!.publisherUID = intent.getStringExtra(QUEST_AUTHOR_ID)
         val likesCounter = intent.getParcelableArrayListExtra<QuestLike>(QUEST_LIKES)
         val responsesCounter = intent.getParcelableArrayListExtra<QuestLike>(QUEST_RESPONSES)
         questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
@@ -126,7 +146,12 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
     }
 
     private fun loadQuest() {
-        //TODO: load quest using the mQuestId variable.
+
+        //  configure view with quest data
+        questDetailTitleTextView.text = mQuest?.title
+        questDetailDescriptionTextView.text = mQuest?.description
+        questDetailDateTextView.text = mQuest?.publishedAt
+//        questDetailAuthorTextView.setText(resources.getString(R.string.generic_username).replace("{username}", intent.getStringExtra(QUEST_AUTHOR)))
 
         mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 
