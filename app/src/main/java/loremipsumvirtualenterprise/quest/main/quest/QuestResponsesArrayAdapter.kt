@@ -56,7 +56,6 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
         holder?.itemQuestResponseText?.text = questResponse.text
         holder?.itemQuestPublishDate?.text = questResponse.publishedAt
         loadAuthorForHolder(holder, questResponse)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {

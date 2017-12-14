@@ -60,8 +60,8 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         setContentView(R.layout.activity_quest_detail)
         changeStatusBarColor()
         setUpToolbar(questDetailToolbar as Toolbar, resources.getString(R.string.detail_title))
-        initViews()
         getExtrasAndLoadQuestData()
+        initViews()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -87,16 +87,28 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
     //region Private Methods
 
-    private fun initViews() {
+    private fun configureRecicleView() {
         mQuestResponsesArrayAdapter = QuestResponsesArrayAdapter(this, mResponses!!,
                 downvoteClickListener = {
                     //TODO: call service to register downvoting
                 }, upvoteClickListener = {
-                    //TODO: call service to register upvoting
+            //TODO: call service to register upvoting
         })
         questResponsesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         questResponsesRecyclerView.itemAnimator = DefaultItemAnimator()
         questResponsesRecyclerView.adapter = mQuestResponsesArrayAdapter
+    }
+
+    private fun initViews() {
+//        mQuestResponsesArrayAdapter = QuestResponsesArrayAdapter(this, mResponses!!,
+//                downvoteClickListener = {
+//                    //TODO: call service to register downvoting
+//                }, upvoteClickListener = {
+//                    //TODO: call service to register upvoting
+//        })
+//        questResponsesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//        questResponsesRecyclerView.itemAnimator = DefaultItemAnimator()
+//        questResponsesRecyclerView.adapter = mQuestResponsesArrayAdapter
         questDetailResponseEditText.addTextChangedListener(this)
         questDetailSendResponseButton.setOnClickListener {
             if (questDetailResponseEditText.text != null) {
@@ -118,6 +130,9 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
                 FirebaseDatabaseUtil.questsNode?.child(mQuest?.id)?.updateChildren(questAsMap)
 
                 questDetailResponseEditText.text = null
+
+                mResponses = mQuest?.responses!!
+                mQuestResponsesArrayAdapter?.notifyDataSetChanged()
             }
 
         }
@@ -166,6 +181,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
         mResponses = mQuest?.responses ?: ArrayList<QuestResponse>() //mQuest?.responsesAsStringArray()!!
 
+        configureRecicleView()
         mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 
         if (mResponses?.size == 0) {
