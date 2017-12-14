@@ -8,15 +8,19 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_create_quest.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
+import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
 import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
@@ -28,16 +32,11 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CreateQuestActivity : AppCompatActivity()
+class CreateQuestActivity : QuestGenericActivity()
 {
 
     // Constants
     private val TAG = "CreateQuestActivity"
-
-    //UI elements
-    private var questTitleEditText: EditText? = null
-    private var questDescriptionEditText: EditText? = null
-    private var createQuestButton: Button? = null
 
     // Constructor
     companion object {
@@ -50,66 +49,53 @@ class CreateQuestActivity : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quest)
-        bindUIElements()
-        configureUIElements()
+
+        setUpToolbar(mainToolbar as Toolbar?, resources.getString(R.string.create_new_quest))
+        changeStatusBarColor()
+
+        configureEditTexts()
         configureListeners()
     }
 
-    // Binding
-    private fun bindUIElements() {
-        // EditTexts
-        questTitleEditText = findViewById<EditText>(R.id.createQuestTitleEditText) as EditText
-        questDescriptionEditText = findViewById<EditText>(R.id.createQuestDescriptionEditText) as EditText
-        // Buttons
-        createQuestButton = findViewById<Button>(R.id.createQuestButton) as Button
-        // Other
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 
     // UI Configuration
-    private fun configureUIElements() {
-        configureEditTexts()
-        configureToolbar()
-    }
-
     private fun configureEditTexts() {
-        questTitleEditText?.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
-        questDescriptionEditText?.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
-    }
-
-    private fun configureToolbar() {
-        mainToolbarTitleTextView.text = resources.getString(R.string.create_new_quest)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+        createQuestTitleEditText?.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
+        createQuestDescriptionEditText?.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
     }
 
     // Listeners
     private fun configureListeners() {
-        createQuestButton!!.setOnClickListener( { createQuestAndPostToFirebase() } )
+        createQuestButton?.setOnClickListener{ createQuestAndPostToFirebase() }
     }
 
     // Validations
     private fun areFieldsValid(): Boolean {
-        val isValidTitle = isValidTitle(questTitleEditText?.text.toString())
-        val isValidDescription = isValidDescription(questDescriptionEditText?.text.toString())
+        val isValidTitle = isValidTitle(createQuestTitleEditText?.text.toString())
+        val isValidDescription = isValidDescription(createQuestDescriptionEditText?.text.toString())
         return isValidTitle && isValidDescription
     }
 
 
     private fun isValidTitle(title: String): Boolean {
         if (TextUtils.isEmpty(title)) {
-            questTitleEditText?.error = "Título inválido."
+            createQuestTitleEditText?.error = "Título inválido."
             return false
         }
-        questTitleEditText?.error = null
+        createQuestTitleEditText?.error = null
         return true
     }
 
     private fun isValidDescription(description: String): Boolean {
         if (TextUtils.isEmpty(description)) {
-            questDescriptionEditText?.error = "Descrição inválida."
+            createQuestDescriptionEditText?.error = "Descrição inválida."
             return false
         }
-        questDescriptionEditText?.error = null
+        createQuestDescriptionEditText?.error = null
         return true
     }
 
@@ -132,8 +118,8 @@ class CreateQuestActivity : AppCompatActivity()
             // Create and configure Quest object
             val quest = Quest.create()
             quest.id = newFirebaseQuestItem?.key
-            quest.title = questTitleEditText?.text.toString()
-            quest.description = questDescriptionEditText?.text.toString()
+            quest.title = createQuestTitleEditText?.text.toString()
+            quest.description = createQuestDescriptionEditText?.text.toString()
             quest.publishedAt = currentDateTime()
             quest.publisherUID = FirebaseAuth.getInstance().currentUser!!.uid
 

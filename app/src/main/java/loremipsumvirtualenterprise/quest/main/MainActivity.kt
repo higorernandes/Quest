@@ -18,8 +18,9 @@ import android.text.SpannableStringBuilder
 import loremipsumvirtualenterprise.quest.util.CustomTypefaceSpan
 import android.support.v4.content.res.ResourcesCompat
 import android.graphics.Typeface
+import android.support.v4.view.ViewPager
 
-class MainActivity : AppCompatActivity()
+class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener
 {
     //region Companion Object
 
@@ -39,6 +40,14 @@ class MainActivity : AppCompatActivity()
 
         changeStatusBarColor()
         configureBottomBar()
+    }
+
+    override fun onPageScrollStateChanged(state: Int) { }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
+
+    override fun onPageSelected(position: Int) {
+        mainBottomBar.selectedItemId = position
     }
 
     //endregion
@@ -79,6 +88,7 @@ class MainActivity : AppCompatActivity()
 
         setCurrentFragment(MainFragmentTabsManager.MainFragmentType.FRAGMENT_BOARD)
     }
+
 
     private fun setCurrentFragment(fragmentType: MainFragmentTabsManager.MainFragmentType) {
         val fragmentManager = supportFragmentManager

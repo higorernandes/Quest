@@ -14,7 +14,7 @@
 
         <include
             android:id="@+id/mainToolbar"
-            layout="@layout/toolbar_main"
+            layout="@layout/toolbar_detail"
             android:elevation="7dp" />
 
     </android.support.design.widget.AppBarLayout>

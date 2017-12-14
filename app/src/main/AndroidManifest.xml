@@ -20,6 +20,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,8 +28,7 @@
         <!-- Onboarding -->
         <activity
             android:name=".account.OnboardingActivity"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
 
         <!-- Main -->
         <activity
@@ -80,7 +80,7 @@
         <activity
             android:name=".main.quest.QuestDetailActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".generic.GenericWebViewActivity"></activity>
     </application>
 
 </manifest>

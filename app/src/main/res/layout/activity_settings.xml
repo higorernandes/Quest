@@ -282,11 +282,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/settingsPrivacyPolicyLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="@dimen/default_medium_margin"
-                android:layout_marginEnd="@dimen/default_medium_margin">
+                android:paddingStart="@dimen/default_medium_margin"
+                android:paddingEnd="@dimen/default_medium_margin"
+                android:foreground="?attr/selectableItemBackground">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -305,11 +307,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/settingsAboutLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="@dimen/default_medium_margin"
-                android:layout_marginEnd="@dimen/default_medium_margin">
+                android:paddingStart="@dimen/default_medium_margin"
+                android:paddingEnd="@dimen/default_medium_margin"
+                android:foreground="?attr/selectableItemBackground">
 
                 <TextView
                     android:layout_width="match_parent"

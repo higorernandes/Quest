@@ -133,15 +133,6 @@ class BoardFragment : MainGenericFragment()
         initViews()
         configureListeners()
         setUpToolbar()
-        if (!NetworkHelper.isConnected) {
-            noInternetReconnectButton.visibility = View.VISIBLE
-            emptyLayout.visibility = View.VISIBLE
-            mainBoardRecyclerView.visibility = View.GONE
-            boardFloatingActionButton.visibility = View.GONE
-            mProgress?.hide()
-        } else {
-            mProgress?.hide()
-        }
     }
 
     override fun onFragmentReselected() { }

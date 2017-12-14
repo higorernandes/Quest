@@ -20,7 +20,24 @@
             android:layout_centerInParent="true"
             android:hint="@string/search_hint_text"
             android:theme="@style/WhiteEditTextTheme"
-            android:layout_marginEnd="@dimen/default_medium_margin" />
+            android:layout_marginEnd="@dimen/default_small_margin"
+            android:layout_toStartOf="@+id/searchToolbarSearchButton"/>
+
+        <RelativeLayout
+            android:id="@+id/searchToolbarSearchButton"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_search"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
