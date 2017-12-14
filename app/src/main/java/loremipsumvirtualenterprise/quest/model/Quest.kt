@@ -34,12 +34,11 @@ class Quest {
             questItem.likes = map.get("likes") as ArrayList<QuestLike>?
 
             questItem.responses = ArrayList<QuestResponse>()
-            val responseItems = map.get("responses") as ArrayList<Map<String, Any>>
-            for (responseItem in responseItems) {
-                var response = QuestResponse.create()
-                response.userUid = responseItem.get("userUid") as String?
-                response.text = responseItem.get("text") as String?
-                questItem!!.responses!!.add(response)
+            val responseItems = map.get("responses") as ArrayList<Map<String, Any>>?
+            if (responseItems != null) {
+                for (responseItem in responseItems) {
+                    questItem!!.responses!!.add(QuestResponse.createFromMap(responseItem))
+                }
             }
 
             return questItem
@@ -65,20 +64,6 @@ class Quest {
         map.put("responses", this.responses)
 
         return map
-    }
-
-    fun responsesAsStringArray() : ArrayList<String> {
-
-        var stringArray = ArrayList<String>()
-
-        if (this.responses != null) {
-            for (response in this.responses!!) {
-                stringArray.add(response.text!!)
-            }
-        }
-
-        return stringArray
-
     }
 
 }

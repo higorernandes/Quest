@@ -27,6 +27,8 @@ import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
 import loremipsumvirtualenterprise.quest.model.QuestUser
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
+import java.text.SimpleDateFormat
+import java.util.*
 
 class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 {
@@ -100,8 +102,10 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
             if (questDetailResponseEditText.text != null) {
 
                 var questResponse = QuestResponse.create()
-                questResponse.userUid = FirebaseAuth.getInstance().currentUser?.uid
+                questResponse.publisherUid = FirebaseAuth.getInstance().currentUser?.uid
                 questResponse.text = questDetailResponseEditText.text.toString()
+                questResponse.publishedAt = currentDateTime()
+                questResponse.votes = 0
 
                 if(mQuest?.responses == null){
                     mQuest?.responses = ArrayList<QuestResponse>()
@@ -117,6 +121,13 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
             }
 
         }
+    }
+
+    // Helpers
+    private fun currentDateTime(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
+        val date : Date = Date()
+        return dateFormat.format(date)
     }
 
     // Listeners

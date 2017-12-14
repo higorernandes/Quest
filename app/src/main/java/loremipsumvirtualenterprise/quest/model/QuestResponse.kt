@@ -6,36 +6,28 @@ import android.os.Parcelable
 /**
  * Created by bocato on 09/12/17.
  */
-class QuestResponse() : Parcelable
-{
-    constructor(parcel: Parcel) : this() {
-        val data = arrayOfNulls<String>(0)
+class QuestResponse {
 
-        parcel.readStringArray(data)
-    }
-
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        p0?.writeStringArray(arrayOf<String>())
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<QuestResponse> {
-
-        override fun createFromParcel(parcel: Parcel): QuestResponse {
-            return QuestResponse(parcel)
-        }
-
-        override fun newArray(size: Int): Array<QuestResponse?> {
-            return arrayOfNulls(size)
-        }
-
+    companion object Factory {
         fun create(): QuestResponse = QuestResponse()
+        fun createFromMap(map: Map<String, Any?>): QuestResponse {
+
+            val questResponse = QuestResponse.create()
+
+            questResponse.publisherUid = map.get("publisherUid") as String?
+            questResponse.text = map.get("text") as String?
+            questResponse.publishedAt = map.get("publishedAt") as String?
+            val votes = map.get("votes")
+            questResponse.votes = votes as Long? // change this to an object
+
+            return questResponse
+        }
     }
 
-    var userUid: String? = null
+
+    var publisherUid: String? = null
     var text: String? = null
+    var publishedAt: String? = null
+    var votes: Long? = null
 
 }

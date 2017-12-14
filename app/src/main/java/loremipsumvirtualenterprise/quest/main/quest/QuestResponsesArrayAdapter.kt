@@ -11,8 +11,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import loremipsumvirtualenterprise.quest.R
+import loremipsumvirtualenterprise.quest.main.board.QuestsArrayAdapter
+import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestResponse
+import loremipsumvirtualenterprise.quest.model.QuestUser
+import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 
 /**
  * Created by root on 2017-12-10.
@@ -29,7 +36,6 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
     //region Overridden Methods
 
     override fun onBindViewHolder(holder: Holder?, position: Int) {
-        val questResponse: QuestResponse = mObjects!![position]
         Glide.with(mContext)
                 .load("https://vignette.wikia.nocookie.net/rickandmorty/images/8/8f/Rickk22.png")
                 .apply(RequestOptions.circleCropTransform())
@@ -44,7 +50,13 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
             holder.itemResponseUpvoteButton!!.background = ContextCompat.getDrawable(mContext, R.drawable.ic_arrow_down_filled)
         }
 
-        holder?.itemResponseVotesCounter?.text = "5"
+        // configure ui
+        val questResponse: QuestResponse = mObjects!![position]
+        holder?.itemResponseVotesCounter?.text = questResponse.votes.toString()
+        holder?.itemQuestResponseText?.text = questResponse.text
+        holder?.itemQuestPublishDate?.text = questResponse.publishedAt
+        loadAuthorForHolder(holder, questResponse)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
@@ -62,6 +74,23 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
 
     //endregion
 
+    // Helpers
+    fun loadAuthorForHolder(holder: QuestResponsesArrayAdapter.Holder?, questResponse: QuestResponse) {
+
+        val publisherDatabaseReference = FirebaseDatabaseUtil.usersNode?.child(questResponse.publisherUid!!)
+
+        publisherDatabaseReference?.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.value != null) {
+                    val questUser = QuestUser.createFromDataSnapshot(snapshot)
+                    holder?.itemQuestResponseAuthor?.text = "@" + questUser.name
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+
+    }
+
     //region Inner Class
 
     class Holder constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -70,12 +99,18 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
         var itemResponseUpvoteButton: Button? = null
         var itemResponseDownvoteButton: Button? = null
         var itemResponseVotesCounter: TextView? = null
+        var itemQuestResponseAuthor: TextView? = null
+        var itemQuestResponseText: TextView? = null
+        var itemQuestPublishDate: TextView? = null
 
         init {
             itemResponseAuthorImageView = itemView.findViewById(R.id.itemResponseAuthorImageView)
             itemResponseUpvoteButton = itemView.findViewById(R.id.itemResponseUpvoteButton)
             itemResponseDownvoteButton = itemView.findViewById(R.id.itemResponseDownvoteButton)
             itemResponseVotesCounter = itemView.findViewById(R.id.itemResponseVotesCounter)
+            itemQuestResponseAuthor = itemView.findViewById(R.id.itemQuestResponseAuthor)
+            itemQuestResponseText = itemView.findViewById(R.id.itemQuestResponseText)
+            itemQuestPublishDate = itemView.findViewById(R.id.itemQuestPublishDate)
         }
     }
 
