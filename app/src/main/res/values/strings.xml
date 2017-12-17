@@ -82,5 +82,6 @@
     <!-- Details -->
     <string name="detail_title">Detalhes</string>
     <string name="detail_no_responses_text">Ainda não há respostas para esta pergunta.</string>
+    <string name="update_password_button_text">Atualizar Senha</string>
 
 </resources>

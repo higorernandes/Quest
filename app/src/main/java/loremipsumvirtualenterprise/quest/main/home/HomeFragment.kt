@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_reset_password.*
 import kotlinx.android.synthetic.main.fragment_main_board.*
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.layout_empty_list.*
@@ -72,6 +73,21 @@ class HomeFragment : MainGenericFragment()
         }
     }
 
+    private fun hasAnAnswerFromUser(questItem: Quest, currentUserUID: String?): Boolean {
+        val responses = questItem.responses
+        if (responses != null && currentUserUID != null){
+            val responsesIterator = questItem.responses!!.iterator()
+            if (responsesIterator.hasNext()) {
+                while (responsesIterator.hasNext()) {
+                    val response = responsesIterator.next()
+                    return response.publisherUid == currentUserUID
+                }
+            }
+        }
+
+        return false
+    }
+
     private fun loadDateFromSnapshot(dataSnapshot: DataSnapshot) {
 
         val items = dataSnapshot.children.iterator()
@@ -97,7 +113,7 @@ class HomeFragment : MainGenericFragment()
                 // add to list
                 val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
                 val wasAskedByUser = questItem.publisherUID != null && currentUserUID != null && questItem.publisherUID!!.equals(currentUserUID)
-                val hasAnAnswerFromUser = false
+                val hasAnAnswerFromUser = hasAnAnswerFromUser(questItem, currentUserUID)
                 if (wasAskedByUser || hasAnAnswerFromUser) {
                     mQuestsList.add(questItem)
                 }
@@ -113,7 +129,7 @@ class HomeFragment : MainGenericFragment()
                 emptyListSuggestionTextView.text = resources.getString(R.string.board_no_items_suggestion_text)
                 noInternetReconnectButton.visibility = View.GONE
                 homeEmptyLayout.visibility = View.VISIBLE
-                mainHomeRecyclerView.visibility = View.GONE
+                mainHomeRecyclerView.visibility = View.GONEg
             } else {
                 mProgress?.hide()
                 mQuestsAdapter?.notifyDataSetChanged()
