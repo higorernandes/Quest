@@ -10,6 +10,7 @@ import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.account.LoginActivity
 import loremipsumvirtualenterprise.quest.generic.GenericWebViewActivity
 import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
+import loremipsumvirtualenterprise.quest.util.SharedPreferencesHelper
 
 class SettingsActivity : QuestGenericActivity()
 {
@@ -58,6 +59,8 @@ class SettingsActivity : QuestGenericActivity()
         val loginActivityIntent : Intent = LoginActivity.getActivityIntent(this)
         loginActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(loginActivityIntent)
+        finish()
+        SharedPreferencesHelper.removeFromSharedPreferences(this, SharedPreferencesHelper.USER_LOGGED)
     }
 
 }
