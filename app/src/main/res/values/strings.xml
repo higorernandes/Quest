@@ -10,6 +10,8 @@
     <string name="no_internet_verify_connection">Verifique sua conexão e tente novamente!</string>
     <string name="generic_try_again">Tentar novamente</string>
     <string name="generic_username">\@{username}</string>
+    <string name="generic_yes">Sim</string>
+    <string name="generic_no">Não</string>
 
     <!-- Onboarding -->
     <string name="onboarding_title_page_one">Tire dúvidas</string>
@@ -73,6 +75,8 @@
     <string name="change_password_current_error">A senha atual não é válida.</string>
     <string name="change_password_min_chars_error">A senha deve conter no mínimo 6 caracteres.</string>
     <string name="change_password_non_matching_error">A senha e a confirmação de senha não são iguais.</string>
+
+    <string name="logout_confirmation">Tem certeza de que deseja sair do Quest?</string>
 
     <!-- Search -->
     <string name="search_hint_text">Busque uma Quest pelo título…</string>
