@@ -28,7 +28,7 @@
         <!-- Onboarding -->
         <activity
             android:name=".account.OnboardingActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
         <!-- Main -->
         <activity
@@ -80,7 +80,8 @@
         <activity
             android:name=".main.quest.QuestDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".generic.GenericWebViewActivity"></activity>
+        <activity android:name=".generic.GenericWebViewActivity" />
+        <activity android:name=".settings.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>

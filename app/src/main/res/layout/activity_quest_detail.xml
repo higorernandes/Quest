@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <!-- Toolbar -->
@@ -19,6 +19,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
+        android:id="@+id/questDetailScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/appBarLayout"
@@ -164,32 +165,46 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/questDetailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:elevation="2dp">
+        android:elevation="7dp"
+        android:background="@android:color/white">
 
-        <EditText
-            android:id="@+id/questDetailResponseEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8.5"
-            android:layout_marginStart="@dimen/cardview_default_margin"
-            android:layout_gravity="center"
-            android:inputType="textPersonName"
-            android:theme="@style/WhiteEditTextTheme" />
-
-        <Button
-            android:id="@+id/questDetailSendResponseButton"
-            android:layout_width="0dp"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:background="@drawable/ic_send"
-            android:backgroundTint="@color/colorDivider"
-            android:foreground="?attr/selectableItemBackground"
-            android:enabled="false"/>
+            android:elevation="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/questDetailResponseEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8.5"
+                    android:layout_marginStart="@dimen/cardview_default_margin"
+                    android:layout_gravity="center"
+                    android:inputType="textPersonName"
+                    android:theme="@style/WhiteEditTextTheme" />
+
+                <Button
+                    android:id="@+id/questDetailSendResponseButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/ic_send"
+                    android:backgroundTint="@color/colorDivider"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:enabled="false"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

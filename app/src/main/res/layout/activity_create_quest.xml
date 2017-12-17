@@ -75,7 +75,7 @@
 
     </LinearLayout>
 
-    <!-- Login Button -->
+    <!-- Create Button -->
     <Button
         android:id="@+id/createQuestButton"
         android:layout_width="match_parent"

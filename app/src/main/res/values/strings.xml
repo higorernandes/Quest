@@ -65,6 +65,14 @@
     <string name="settings_other">Outros</string>
     <string name="settings_privacy_policy">Política de Privacidade</string>
     <string name="settings_about">Sobre</string>
+    <string name="settings_change_password">Alterar senha</string>
+
+    <string name="change_password_current_text">Senha atual</string>
+    <string name="change_password_new_text">Nova senha</string>
+    <string name="change_password_confirm_text">Confirme a nova senha</string>
+    <string name="change_password_current_error">A senha atual não é válida.</string>
+    <string name="change_password_min_chars_error">A senha deve conter no mínimo 6 caracteres.</string>
+    <string name="change_password_non_matching_error">A senha e a confirmação de senha não são iguais.</string>
 
     <!-- Search -->
     <string name="search_hint_text">Busque uma Quest pelo título…</string>
