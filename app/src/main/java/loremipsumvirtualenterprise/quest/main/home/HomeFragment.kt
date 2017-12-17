@@ -129,7 +129,7 @@ class HomeFragment : MainGenericFragment()
                 emptyListSuggestionTextView.text = resources.getString(R.string.board_no_items_suggestion_text)
                 noInternetReconnectButton.visibility = View.GONE
                 homeEmptyLayout.visibility = View.VISIBLE
-                mainHomeRecyclerView.visibility = View.GONEg
+                mainHomeRecyclerView.visibility = View.GONE
             } else {
                 mProgress?.hide()
                 mQuestsAdapter?.notifyDataSetChanged()
