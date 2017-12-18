@@ -51,29 +51,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.loginLoginButton -> {
-//                startActivity(MainActivity.getActivityIntent(this))
                 doLogin()
             }
             R.id.loginForgotPasswordButton -> {
                 val intent : Intent = ForgotPasswordActivity.getActivityIntent(this)
                 startActivity(intent)
-                finish()
             }
             R.id.loginNoAccountButton -> {
                 val intent : Intent = RegisterActivity.getActivityIntent(this)
                 startActivity(intent)
-                finish()
             }
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-            }
-        }
+        onBackPressed()
         return true
     }
 

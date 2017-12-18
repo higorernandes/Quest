@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
@@ -90,8 +91,8 @@ class ChangePasswordActivity : QuestGenericActivity()
                         changePasswordConfirmEditText.error = null
                     } else {
                         changePasswordActionButton.isEnabled = true
-                        changePasswordPasswordEditText.error = resources.getString(R.string.change_password_non_matching_error) //setFontError(resources.getString(R.string.change_password_non_matching_error))
-                        changePasswordConfirmEditText.error = resources.getString(R.string.change_password_non_matching_error) //setFontError(resources.getString(R.string.change_password_non_matching_error))
+                        changePasswordPasswordEditText.error = setFontError(resources.getString(R.string.change_password_non_matching_error)) //setFontError(resources.getString(R.string.change_password_non_matching_error))
+                        changePasswordConfirmEditText.error = setFontError(resources.getString(R.string.change_password_non_matching_error)) //setFontError(resources.getString(R.string.change_password_non_matching_error))
                     }
                 }
             }
@@ -99,13 +100,13 @@ class ChangePasswordActivity : QuestGenericActivity()
     }
 
     private fun setFonts() {
-        changePasswordCurrentTextInputLayout.setTypeface(QuestGenericActivity.sAvenirNextRegular)
-        changePasswordPasswordTextInputLayout.setTypeface(QuestGenericActivity.sAvenirNextRegular)
-        changePasswordConfirmTextInputLayout.setTypeface(QuestGenericActivity.sAvenirNextRegular)
+        changePasswordCurrentTextInputLayout.setTypeface(ResourcesCompat.getFont(this, R.font.avenir_next_regular))
+        changePasswordPasswordTextInputLayout.setTypeface(ResourcesCompat.getFont(this, R.font.avenir_next_regular))
+        changePasswordConfirmTextInputLayout.setTypeface(ResourcesCompat.getFont(this, R.font.avenir_next_regular))
 
-        changePasswordCurrentEditText.typeface = QuestGenericActivity.sAvenirNextRegular
-        changePasswordPasswordEditText.typeface = QuestGenericActivity.sAvenirNextRegular
-        changePasswordConfirmEditText.typeface = QuestGenericActivity.sAvenirNextRegular
+        changePasswordCurrentEditText.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
+        changePasswordPasswordEditText.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
+        changePasswordConfirmEditText.typeface = ResourcesCompat.getFont(this, R.font.avenir_next_regular)
     }
 
     // Validation
@@ -113,7 +114,7 @@ class ChangePasswordActivity : QuestGenericActivity()
         if (!hasFocus) {
             if (editText.text.length < 6) {
                 mHasErrors = true
-                inputLayout.error = resources.getString(R.string.change_password_min_chars_error) //setFontError(resources.getString(R.string.change_password_min_chars_error))
+                inputLayout.error = setFontError(resources.getString(R.string.change_password_min_chars_error))
             } else {
                 mHasErrors = false
                 inputLayout.error = null

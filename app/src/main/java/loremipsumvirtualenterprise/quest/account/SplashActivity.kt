@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity()
 
     fun navigateToProperScreen() {
         if (SharedPreferencesHelper.getStringFromSharedPreferences(this, SharedPreferencesHelper.USER_LOGGED) != null && SharedPreferencesHelper.getStringFromSharedPreferences(this, SharedPreferencesHelper.USER_LOGGED).equals("YES")) {
-            startActivity(LoginActivity.getActivityIntent(this))
+            startActivity(MainActivity.getActivityIntent(this))
         } else {
             startActivity(OnboardingActivity.getActivityIntent(this))
         }

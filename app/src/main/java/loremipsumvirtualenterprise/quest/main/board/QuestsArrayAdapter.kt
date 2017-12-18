@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestUser
+import loremipsumvirtualenterprise.quest.util.DateHelper
 import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 
@@ -43,7 +44,7 @@ class QuestsArrayAdapter constructor(context: Context, objects: ArrayList<Quest>
 
         holder?.itemQuestTitle?.text = questItem.title
         holder?.itemQuestDescription?.text = questItem.description
-        holder?.itemQuestPublishDate?.text = questItem.publishedAt
+        holder?.itemQuestPublishDate?.text = DateHelper.Companion.formatDate(questItem.publishedAt)
         loadAuthorForHolder(holder, questItem)
         holder?.itemQuestResponses?.text = mContext.resources.getString(R.string.board_item_responses_text)
                 .replace("{likes}", if (questItem.likes?.size == null) "0" else questItem.likes?.size.toString())

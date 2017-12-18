@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener
     //region Companion Object
 
     companion object {
+        var instance: MainActivity? = null
+
         fun getActivityIntent(context : Context) : Intent {
             return Intent(context, MainActivity::class.java)
         }
@@ -37,6 +39,8 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        instance = this
 
         changeStatusBarColor()
         configureBottomBar()

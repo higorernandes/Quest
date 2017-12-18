@@ -11,7 +11,7 @@ class QuestResponseVote {
 
             val questResponseVote = QuestResponseVote.create()
             questResponseVote.userUID = map.get("userUID") as String?
-            questResponseVote.value = map.get("value") as Int
+            questResponseVote.value = (map.get("value") as Long).toInt()
 
             return questResponseVote
         }

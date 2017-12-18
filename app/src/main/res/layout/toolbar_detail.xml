@@ -13,10 +13,11 @@
     android:gravity="center">
 
     <RelativeLayout
+        android:id="@+id/toolbarDetailContainerRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="?attr/actionBarSize"
-        android:gravity="center">
+        android:layout_marginEnd="?attr/actionBarSize"
+        android:gravity="center_vertical">
 
         <!-- Toolbar title -->
         <TextView
@@ -29,14 +30,15 @@
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/font_size_large"/>
 
-        <!-- Search Button -->
+        <!-- Delete Button -->
         <RelativeLayout
             android:id="@+id/mainToolbarActionButton"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
             android:gravity="center"
-            android:visibility="gone">
+            android:layout_toStartOf="@+id/mainToolbarSecondActionButton"
+            android:visibility="gone"
+            android:foreground="?attr/selectableItemBackground">
 
             <ImageView
                 android:id="@+id/mainToolbarActionIcon"
@@ -44,6 +46,27 @@
                 android:layout_height="@dimen/button_small_height"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/ic_search"
+                android:tint="@color/colorPrimary"
+                android:elevation="2dp"/>
+
+        </RelativeLayout>
+
+        <!-- Edit Button -->
+        <RelativeLayout
+            android:id="@+id/mainToolbarSecondActionButton"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:visibility="gone"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/mainToolbarSecondActionIcon"
+                android:layout_width="@dimen/button_small_height"
+                android:layout_height="@dimen/button_small_height"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_edit"
                 android:tint="@color/colorPrimary"
                 android:elevation="2dp"/>
 

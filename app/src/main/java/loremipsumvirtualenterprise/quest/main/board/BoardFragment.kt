@@ -69,8 +69,8 @@ class BoardFragment : MainGenericFragment()
             // Getting Item failed, log a message
             mProgress?.hide()
             Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
-            emptyLayout.visibility = View.VISIBLE
-            mainBoardRecyclerView.visibility = View.GONE
+            emptyLayout?.visibility = View.VISIBLE
+            mainBoardRecyclerView?.visibility = View.GONE
         }
     }
 
@@ -79,8 +79,8 @@ class BoardFragment : MainGenericFragment()
         val items = dataSnapshot.children.iterator()
         mQuestsList.clear()
 
-        if (emptyLayout.visibility == View.VISIBLE) {
-            emptyLayout.visibility = View.GONE
+        if (emptyLayout?.visibility == View.VISIBLE) {
+            emptyLayout?.visibility = View.GONE
             mainBoardRecyclerView.visibility = View.VISIBLE
         }
 

@@ -10,27 +10,22 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils
-import android.text.TextUtils.*
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.main.MainActivity
 import loremipsumvirtualenterprise.quest.model.QuestUser
-import loremipsumvirtualenterprise.quest.util.FirebaseConstants
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.ArrayAdapter
+
+
 
 class RegisterActivity : AppCompatActivity(){
 
@@ -63,6 +58,7 @@ class RegisterActivity : AppCompatActivity(){
         bindUIElements()
         configureUIElements()
         configureListeners()
+        loadSchools()
     }
 
     // Initialization
@@ -109,6 +105,19 @@ class RegisterActivity : AppCompatActivity(){
         setSupportActionBar(mainToolbar as Toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+    }
+
+    private fun loadSchools() {
+        //TODO: take this off and load correct options list.
+        
+        val schools = ArrayList<String>()
+        schools.add("UFU - Universidade Federal de Uberlândia")
+        schools.add("UNITRI - Centro Universitário do Triângulo")
+        schools.add("UFTM - Universidade Federal do Triângulo Mineiro")
+
+        val dataAdapter = ArrayAdapter<String>(this, R.layout.item_school_spinner, schools)
+        dataAdapter.setDropDownViewResource(R.layout.item_school_spinner)
+        registerSchoolSpinner.adapter = dataAdapter
     }
 
     private fun changeStatusBarColor() {

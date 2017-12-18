@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Someone answered your question. hahahahahahahaha"
+            android:text="Someone answered your question!"
             android:layout_marginBottom="@dimen/cardview_default_margin"
             android:maxLines="2"
             android:ellipsize="end"

@@ -1,32 +1,40 @@
 package loremipsumvirtualenterprise.quest.main.quest
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_quest_detail.*
-import kotlinx.android.synthetic.main.toolbar_main.*
+import kotlinx.android.synthetic.main.toolbar_detail.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
 import loremipsumvirtualenterprise.quest.model.*
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.Toast
 import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.toolbar_detail.*
+import kotlinx.android.synthetic.main.toolbar_detail.view.*
+import loremipsumvirtualenterprise.quest.util.DateHelper
+
 
 class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 {
@@ -109,7 +117,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
             var questResponseVote: QuestResponseVote? = questResponse.votes?.find { it.userUID == FirebaseAuth.getInstance().currentUser!!.uid!! }
             if (questResponseVote == null) {
-                var questResponseVote = QuestResponseVote.create()
+                questResponseVote = QuestResponseVote.create()
                 questResponseVote.userUID = FirebaseAuth.getInstance().currentUser?.uid
             }
             questResponseVote?.value = value
@@ -156,6 +164,48 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
             }
 
         }
+        mainToolbarActionButton.visibility = View.VISIBLE
+        mainToolbarSecondActionButton.visibility = View.VISIBLE
+        mainToolbarActionIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_trash))
+        mainToolbarSecondActionIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_edit))
+
+        //Configuring toolbar icons
+        val layoutParams = Toolbar.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.MATCH_PARENT)
+        layoutParams.marginEnd = 0
+        layoutParams.rightMargin = 0
+        toolbarDetailContainerRelativeLayout.layoutParams = layoutParams
+
+        val buttonLayoutParams  = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        buttonLayoutParams.marginStart = 0
+        buttonLayoutParams.marginEnd = 150
+        mainToolbarTitleTextView.layoutParams = buttonLayoutParams
+
+        mainToolbarActionButton.setOnClickListener { confirmDeleteQuest() }
+        mainToolbarSecondActionButton.setOnClickListener {
+            //TODO: navigate to edit
+        }
+    }
+
+    private fun confirmDeleteQuest() {
+        val alertDialog: AlertDialog = AlertDialog.Builder(this).setMessage(resources.getString(R.string.delete_delete_confirmation)).create()
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.generic_yes)) { _, _ -> deleteQuest() }
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, resources.getString(R.string.generic_no)) { dialog, _ -> dialog.dismiss() }
+
+        val text = alertDialog.window.findViewById<TextView>(android.R.id.message)
+        val button1 = alertDialog.findViewById<TextView>(android.R.id.button1)
+        alertDialog.show()
+
+        text?.typeface = QuestGenericActivity.sAvenirNextRegular
+        button1?.typeface = QuestGenericActivity.sAvenirNextRegular
+    }
+
+    private fun navigateToEditQuest() {
+
+    }
+
+    private fun deleteQuest() {
+        //TODO: call service to delete quest.
+        finish()
     }
 
     // Helpers
@@ -193,7 +243,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         //  configure view with quest data
         questDetailTitleTextView.text = mQuest?.title
         questDetailDescriptionTextView.text = mQuest?.description
-        questDetailDateTextView.text = mQuest?.publishedAt
+        questDetailDateTextView.text = DateHelper.formatDate(mQuest?.publishedAt)
         loadAuthor()
         questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
                 .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
@@ -204,7 +254,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         configureRecicleView()
         mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 
-        if (mResponses?.size == 0) {
+        if (mResponses.size == 0) {
             questDetailNoResponsesTextView.visibility = View.VISIBLE
             questResponsesRecyclerView.visibility = View.GONE
         } else {

@@ -10,6 +10,8 @@
     <string name="no_internet_verify_connection">Verifique sua conexão e tente novamente!</string>
     <string name="generic_try_again">Tentar novamente</string>
     <string name="generic_username">\@{username}</string>
+    <string name="generic_yes">Sim</string>
+    <string name="generic_no">Não</string>
 
     <!-- Onboarding -->
     <string name="onboarding_title_page_one">Tire dúvidas</string>
@@ -33,6 +35,12 @@
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="create_account">Cadastrar</string>
+    <string-array name="schools_array">
+        <item>UFU - Universidade Federal de Uberlândia</item>
+        <item>UFTM - Universidade Federal do Triângulo Mineiro</item>
+        <item>UNITRI - Centro Universitário do Triângulo</item>
+        <item>UNIUBE - Universidade de Uberaba</item>
+    </string-array>
 
     <!-- Forgot Password  -->
     <string name="reset_password_label">Resetar Senha</string>
@@ -58,6 +66,9 @@
     <string name="create_quest_title">Título</string>
     <string name="create_quest_description_label">Descrição</string>
 
+    <!-- Quest detail -->
+    <string name="delete_delete_confirmation">Tem certeza de que deseja excluir a pergunta? Esta operação não pode ser desfeita.</string>
+
     <!-- Settings -->
     <string name="settings_toolbar_title">Configurações</string>
     <string name="settings_account">Minha conta</string>
@@ -74,6 +85,8 @@
     <string name="change_password_min_chars_error">A senha deve conter no mínimo 6 caracteres.</string>
     <string name="change_password_non_matching_error">A senha e a confirmação de senha não são iguais.</string>
 
+    <string name="logout_confirmation">Tem certeza de que deseja sair do Quest?</string>
+
     <!-- Search -->
     <string name="search_hint_text">Busque uma Quest pelo título…</string>
     <string name="placeholder">\@morty_smith</string>
@@ -83,5 +96,7 @@
     <string name="detail_title">Detalhes</string>
     <string name="detail_no_responses_text">Ainda não há respostas para esta pergunta.</string>
     <string name="update_password_button_text">Atualizar Senha</string>
+    <string name="detail_option_edit">Editar</string>
+    <string name="detail_option_delete">Excluir</string>
 
 </resources>
