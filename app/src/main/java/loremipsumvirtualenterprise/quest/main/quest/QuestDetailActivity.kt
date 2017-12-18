@@ -187,16 +187,22 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
     }
 
     private fun confirmDeleteQuest() {
-        val alertDialog: AlertDialog = AlertDialog.Builder(this).setMessage(resources.getString(R.string.delete_delete_confirmation)).create()
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.generic_yes)) { _, _ -> deleteQuest() }
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, resources.getString(R.string.generic_no)) { dialog, _ -> dialog.dismiss() }
+        val publisherUID = mQuest?.publisherUID
+        val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
+        if (publisherUID != null && currentUserUID != null && currentUserUID == publisherUID) {
+            val alertDialog: AlertDialog = AlertDialog.Builder(this).setMessage(resources.getString(R.string.delete_delete_confirmation)).create()
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.generic_yes)) { _, _ -> deleteQuest() }
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, resources.getString(R.string.generic_no)) { dialog, _ -> dialog.dismiss() }
 
-        val text = alertDialog.window.findViewById<TextView>(android.R.id.message)
-        val button1 = alertDialog.findViewById<TextView>(android.R.id.button1)
-        alertDialog.show()
+            val text = alertDialog.window.findViewById<TextView>(android.R.id.message)
+            val button1 = alertDialog.findViewById<TextView>(android.R.id.button1)
+            alertDialog.show()
 
-        text?.typeface = QuestGenericActivity.sAvenirNextRegular
-        button1?.typeface = QuestGenericActivity.sAvenirNextRegular
+            text?.typeface = QuestGenericActivity.sAvenirNextRegular
+            button1?.typeface = QuestGenericActivity.sAvenirNextRegular
+        } else {
+            Toast.makeText(this, "Você não pode deletar uma quest de outro usuário!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun navigateToEditQuest() {
@@ -204,7 +210,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
     }
 
     private fun deleteQuest() {
-        //TODO: call service to delete quest.
+        FirebaseDatabaseUtil.questsNode?.child(mQuest?.id)?.removeValue()
         finish()
     }
 
@@ -236,32 +242,33 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
     }
 
     private fun loadQuestFromDataSnapshot(snapshot: DataSnapshot) {
-
         mQuest = Quest.createFromDataSnapshot(snapshot)
-        mQuest?.id = snapshot.key
+        if (mQuest != null) {
+            mQuest?.id = snapshot.key
 
-        //  configure view with quest data
-        questDetailTitleTextView.text = mQuest?.title
-        questDetailDescriptionTextView.text = mQuest?.description
-        questDetailDateTextView.text = DateHelper.formatDate(mQuest?.publishedAt)
-        loadAuthor()
-        questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
-                .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
-                .replace("{responses}", if (mQuest?.responses != null) mQuest?.responses?.size.toString() else "0")
+            //  configure view with quest data
+            questDetailTitleTextView.text = mQuest?.title
+            questDetailDescriptionTextView.text = mQuest?.description
+            questDetailDateTextView.text = DateHelper.formatDate(mQuest?.publishedAt)
+            loadAuthor()
+            questLikeResponsesCountTextView.text = resources.getString(R.string.board_item_responses_text)
+                    .replace("{likes}", if (mQuest?.likes != null) mQuest?.likes?.size.toString() else "0")
+                    .replace("{responses}", if (mQuest?.responses != null) mQuest?.responses?.size.toString() else "0")
 
-        mResponses = mQuest?.responses ?: ArrayList<QuestResponse>() //mQuest?.responsesAsStringArray()!!
+            mResponses = mQuest?.responses ?: ArrayList<QuestResponse>() //mQuest?.responsesAsStringArray()!!
 
-        configureRecicleView()
-        mQuestResponsesArrayAdapter?.notifyDataSetChanged()
+            configureRecicleView()
+            mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 
-        if (mResponses.size == 0) {
-            questDetailNoResponsesTextView.visibility = View.VISIBLE
-            questResponsesRecyclerView.visibility = View.GONE
-        } else {
-            questDetailNoResponsesTextView.visibility = View.GONE
-            questResponsesRecyclerView.visibility = View.VISIBLE
+            if (mResponses.size == 0) {
+                questDetailNoResponsesTextView.visibility = View.VISIBLE
+                questResponsesRecyclerView.visibility = View.GONE
+            } else {
+                questDetailNoResponsesTextView.visibility = View.GONE
+                questResponsesRecyclerView.visibility = View.VISIBLE
+            }
+            updateResponsesCounterText()
         }
-        updateResponsesCounterText()
     }
 
     // Helpers

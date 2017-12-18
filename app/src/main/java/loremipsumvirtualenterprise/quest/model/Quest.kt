@@ -19,29 +19,31 @@ class Quest {
 
     companion object Factory {
         fun create(): Quest = Quest()
-        fun createFromDataSnapshot(snapshot: DataSnapshot): Quest {
-            val questItem = Quest.create()
-
+        fun createFromDataSnapshot(snapshot: DataSnapshot): Quest? {
             //get current data in a map
-            val map = snapshot.value as HashMap<*, *>
+            val map = snapshot.value as HashMap<*, *>?
+            if (map != null) {
+                val questItem = Quest.create()
+                //key will return Firebase ID
+                questItem.id = snapshot.key
+                questItem.title = map.get("title") as String?
+                questItem.description = map.get("description") as String?
+                questItem.publishedAt = map.get("publishedAt") as String?
+                questItem.publisherUID = map.get("publisherUID") as String?
+                questItem.likes = map.get("likes") as ArrayList<QuestLike>?
 
-            //key will return Firebase ID
-            questItem.id = snapshot.key
-            questItem.title = map.get("title") as String?
-            questItem.description = map.get("description") as String?
-            questItem.publishedAt = map.get("publishedAt") as String?
-            questItem.publisherUID = map.get("publisherUID") as String?
-            questItem.likes = map.get("likes") as ArrayList<QuestLike>?
-
-            questItem.responses = ArrayList<QuestResponse>()
-            val responseItems = map.get("responses") as ArrayList<Map<String, Any>>?
-            if (responseItems != null) {
-                for (responseItem in responseItems) {
-                    questItem!!.responses!!.add(QuestResponse.createFromMap(responseItem))
+                questItem.responses = ArrayList<QuestResponse>()
+                val responseItems = map.get("responses") as ArrayList<Map<String, Any>>?
+                if (responseItems != null) {
+                    for (responseItem in responseItems) {
+                        questItem!!.responses!!.add(QuestResponse.createFromMap(responseItem))
+                    }
                 }
+
+                return questItem
             }
 
-            return questItem
+            return null
         }
     }
 

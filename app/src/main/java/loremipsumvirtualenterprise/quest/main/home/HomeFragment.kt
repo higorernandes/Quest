@@ -110,12 +110,14 @@ class HomeFragment : MainGenericFragment()
                 val currentItem = itemsIterator.next()
                 val questItem = Quest.createFromDataSnapshot(currentItem)
 
-                // add to list
-                val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
-                val wasAskedByUser = questItem.publisherUID != null && currentUserUID != null && questItem.publisherUID!!.equals(currentUserUID)
-                val hasAnAnswerFromUser = hasAnAnswerFromUser(questItem, currentUserUID)
-                if (wasAskedByUser || hasAnAnswerFromUser) {
-                    mQuestsList.add(questItem)
+                if (questItem != null) {
+                    // add to list
+                    val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid
+                    val wasAskedByUser = questItem.publisherUID != null && currentUserUID != null && questItem.publisherUID!!.equals(currentUserUID)
+                    val hasAnAnswerFromUser = hasAnAnswerFromUser(questItem, currentUserUID)
+                    if (wasAskedByUser || hasAnAnswerFromUser) {
+                        mQuestsList.add(questItem)
+                    }
                 }
 
             }

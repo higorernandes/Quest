@@ -97,7 +97,9 @@ class BoardFragment : MainGenericFragment()
                 val questItem = Quest.createFromDataSnapshot(currentItem)
 
                 // add to list
-                mQuestsList.add(questItem)
+               if (questItem != null){
+                   mQuestsList.add(questItem)
+               }
 
             }
         }

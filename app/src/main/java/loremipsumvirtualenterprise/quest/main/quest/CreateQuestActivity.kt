@@ -128,7 +128,7 @@ class CreateQuestActivity : QuestGenericActivity()
 
             // Dismiss activity and show success dialog
             finish()
-            Toast.makeText(this, "New quest saved!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Nova quest criada!", Toast.LENGTH_SHORT).show()
         }
     }
 
