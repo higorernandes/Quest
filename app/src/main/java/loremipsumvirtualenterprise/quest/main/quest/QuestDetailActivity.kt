@@ -2,13 +2,11 @@ package loremipsumvirtualenterprise.quest.main.quest
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,11 +17,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_quest_detail.*
-import kotlinx.android.synthetic.main.toolbar_main.*
+import kotlinx.android.synthetic.main.toolbar_detail.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
 import loremipsumvirtualenterprise.quest.model.Quest
-import loremipsumvirtualenterprise.quest.model.QuestLike
 import loremipsumvirtualenterprise.quest.model.QuestResponse
 import loremipsumvirtualenterprise.quest.model.QuestUser
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
@@ -136,6 +133,9 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
             }
 
         }
+        mainToolbarActionButton.visibility = View.VISIBLE
+        mainToolbarActionIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_more))
+        mainToolbarActionButton.setOnClickListener {  }
     }
 
     // Helpers
@@ -184,7 +184,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
         configureRecicleView()
         mQuestResponsesArrayAdapter?.notifyDataSetChanged()
 
-        if (mResponses?.size == 0) {
+        if (mResponses.size == 0) {
             questDetailNoResponsesTextView.visibility = View.VISIBLE
             questResponsesRecyclerView.visibility = View.GONE
         } else {

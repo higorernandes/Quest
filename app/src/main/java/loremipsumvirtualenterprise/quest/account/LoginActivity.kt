@@ -1,6 +1,5 @@
 package loremipsumvirtualenterprise.quest.account
 
-import android.app.FragmentManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
