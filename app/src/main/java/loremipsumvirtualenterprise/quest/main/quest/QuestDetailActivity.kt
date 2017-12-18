@@ -22,13 +22,11 @@ import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import loremipsumvirtualenterprise.quest.R
 import loremipsumvirtualenterprise.quest.generic.QuestGenericActivity
-import loremipsumvirtualenterprise.quest.model.Quest
-import loremipsumvirtualenterprise.quest.model.QuestLike
-import loremipsumvirtualenterprise.quest.model.QuestResponse
-import loremipsumvirtualenterprise.quest.model.QuestUser
+import loremipsumvirtualenterprise.quest.model.*
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 {
@@ -89,26 +87,48 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
     private fun configureRecicleView() {
         mQuestResponsesArrayAdapter = QuestResponsesArrayAdapter(this, mResponses!!,
-                downvoteClickListener = {
-                    //TODO: call service to register downvoting
-                }, upvoteClickListener = {
-            //TODO: call service to register upvoting
-        })
+                downvoteClickListener = { holder: QuestResponsesArrayAdapter.Holder?, position: Int ->
+                    updateVotesForHolder(holder, position, -1)
+                },
+                upvoteClickListener = {  holder: QuestResponsesArrayAdapter.Holder?, position: Int ->
+                    updateVotesForHolder(holder, position, 1)
+                })
         questResponsesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         questResponsesRecyclerView.itemAnimator = DefaultItemAnimator()
         questResponsesRecyclerView.adapter = mQuestResponsesArrayAdapter
     }
 
+    private fun updateVotesForHolder(holder: QuestResponsesArrayAdapter.Holder?, position: Int, value: Int) {
+
+        val questResponse = mQuest?.responses?.get(position)
+        if (questResponse != null){
+
+            if (questResponse.votes == null) {
+                questResponse.votes = ArrayList<QuestResponseVote>()
+            }
+
+            var questResponseVote: QuestResponseVote? = questResponse.votes?.find { it.userUID == FirebaseAuth.getInstance().currentUser!!.uid!! }
+            if (questResponseVote == null) {
+                var questResponseVote = QuestResponseVote.create()
+                questResponseVote.userUID = FirebaseAuth.getInstance().currentUser?.uid
+            }
+            questResponseVote?.value = value
+
+            if (!questResponse.votes!!.contains(questResponseVote)) {
+                questResponse.votes!!.add(questResponseVote!!)
+            }
+
+            val questAsMap = mQuest?.asMap()
+
+            FirebaseDatabaseUtil.questsNode?.child(mQuest?.id)?.updateChildren(questAsMap)
+
+            mResponses = mQuest?.responses!!
+            mQuestResponsesArrayAdapter?.notifyDataSetChanged()
+        }
+
+    }
+
     private fun initViews() {
-//        mQuestResponsesArrayAdapter = QuestResponsesArrayAdapter(this, mResponses!!,
-//                downvoteClickListener = {
-//                    //TODO: call service to register downvoting
-//                }, upvoteClickListener = {
-//                    //TODO: call service to register upvoting
-//        })
-//        questResponsesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        questResponsesRecyclerView.itemAnimator = DefaultItemAnimator()
-//        questResponsesRecyclerView.adapter = mQuestResponsesArrayAdapter
         questDetailResponseEditText.addTextChangedListener(this)
         questDetailSendResponseButton.setOnClickListener {
             if (questDetailResponseEditText.text != null) {
@@ -117,7 +137,7 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
                 questResponse.publisherUid = FirebaseAuth.getInstance().currentUser?.uid
                 questResponse.text = questDetailResponseEditText.text.toString()
                 questResponse.publishedAt = currentDateTime()
-                questResponse.votes = 0
+                questResponse.votes = ArrayList<QuestResponseVote>()
 
                 if(mQuest?.responses == null){
                     mQuest?.responses = ArrayList<QuestResponse>()

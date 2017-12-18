@@ -24,7 +24,7 @@ import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 /**
  * Created by root on 2017-12-10.
  */
-class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayList<QuestResponse>, private val upvoteClickListener: (String) -> Unit, private val downvoteClickListener: (String) -> Unit) : RecyclerView.Adapter<QuestResponsesArrayAdapter.Holder>()
+class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayList<QuestResponse>, private val upvoteClickListener: (holder: Holder?, position: Int) -> Unit, private val downvoteClickListener: (holder: Holder?, position: Int) -> Unit) : RecyclerView.Adapter<QuestResponsesArrayAdapter.Holder>()
 {
     //region Attributes
 
@@ -42,11 +42,11 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
                 .into(holder?.itemResponseAuthorImageView)
 
         holder?.itemResponseUpvoteButton?.setOnClickListener {
-            upvoteClickListener("")
+            upvoteClickListener(holder, position)
             holder.itemResponseUpvoteButton!!.background = ContextCompat.getDrawable(mContext, R.drawable.ic_arrow_down_filled)
         }
         holder?.itemResponseDownvoteButton?.setOnClickListener {
-            downvoteClickListener("")
+            downvoteClickListener(holder, position)
             holder.itemResponseUpvoteButton!!.background = ContextCompat.getDrawable(mContext, R.drawable.ic_arrow_down_filled)
         }
 

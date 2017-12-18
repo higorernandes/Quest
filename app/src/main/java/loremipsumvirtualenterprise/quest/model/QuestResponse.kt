@@ -17,17 +17,21 @@ class QuestResponse {
             questResponse.publisherUid = map.get("publisherUid") as String?
             questResponse.text = map.get("text") as String?
             questResponse.publishedAt = map.get("publishedAt") as String?
-            val votes = map.get("votes")
-            questResponse.votes = votes as Long? // change this to an object
+            questResponse.votes = ArrayList<QuestResponseVote>()
+            val questResponseVotes = map.get("votes") as ArrayList<Map<String, Any>>?
+            if (questResponseVotes != null) {
+                for (responseVote in questResponseVotes) {
+                    questResponse!!.votes!!.add(QuestResponseVote.createFromMap(responseVote))
+                }
+            }
 
             return questResponse
         }
     }
 
-
     var publisherUid: String? = null
     var text: String? = null
     var publishedAt: String? = null
-    var votes: Long? = null
+    var votes: ArrayList<QuestResponseVote>? = null
 
 }
