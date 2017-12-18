@@ -125,7 +125,7 @@ class HomeFragment : MainGenericFragment()
 
         //alert adapter that has changed
         activity.runOnUiThread {
-            if (mQuestsList.size == 0) {
+            if (mQuestsList?.size == 0) {
                 emptyListGreetingTextView.text = resources.getString(R.string.board_no_items_greeting_text)
                 emptyListTextTextView.text = resources.getString(R.string.board_no_items_text)
                 emptyListSuggestionTextView.text = resources.getString(R.string.board_no_items_suggestion_text)
