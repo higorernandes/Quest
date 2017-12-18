@@ -62,7 +62,7 @@ class BoardFragment : MainGenericFragment()
     var questItemsListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             // Get Post object and use the values to update the UI
-            loadDateFromSnapshot(dataSnapshot)
+            loadDataFromSnapshot(dataSnapshot)
         }
 
         override fun onCancelled(databaseError: DatabaseError) {
@@ -74,7 +74,7 @@ class BoardFragment : MainGenericFragment()
         }
     }
 
-    private fun loadDateFromSnapshot(dataSnapshot: DataSnapshot) {
+    private fun loadDataFromSnapshot(dataSnapshot: DataSnapshot) {
 
         val items = dataSnapshot.children.iterator()
         mQuestsList.clear()

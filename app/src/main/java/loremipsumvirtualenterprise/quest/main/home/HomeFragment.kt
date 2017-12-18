@@ -68,8 +68,8 @@ class HomeFragment : MainGenericFragment()
             // Getting Item failed, log a message
             mProgress?.hide()
             Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
-            homeEmptyLayout.visibility = View.VISIBLE
-            mainHomeRecyclerView.visibility = View.GONE
+            homeEmptyLayout?.visibility = View.VISIBLE
+            mainHomeRecyclerView?.visibility = View.GONE
         }
     }
 
@@ -93,9 +93,9 @@ class HomeFragment : MainGenericFragment()
         val items = dataSnapshot.children.iterator()
         mQuestsList.clear()
 
-        if (homeEmptyLayout.visibility == View.VISIBLE) {
-            homeEmptyLayout.visibility = View.GONE
-            mainHomeRecyclerView.visibility = View.VISIBLE
+        if (homeEmptyLayout?.visibility == View.VISIBLE) {
+            homeEmptyLayout?.visibility = View.GONE
+            mainHomeRecyclerView?.visibility = View.VISIBLE
         }
 
         //Check if current database contains any collection
@@ -130,14 +130,14 @@ class HomeFragment : MainGenericFragment()
                 emptyListTextTextView.text = resources.getString(R.string.board_no_items_text)
                 emptyListSuggestionTextView.text = resources.getString(R.string.board_no_items_suggestion_text)
                 noInternetReconnectButton.visibility = View.GONE
-                homeEmptyLayout.visibility = View.VISIBLE
+                homeEmptyLayout?.visibility = View.VISIBLE
                 mainHomeRecyclerView.visibility = View.GONE
             } else {
                 mProgress?.hide()
                 mQuestsAdapter?.notifyDataSetChanged()
                 mainHomeRecyclerView.visibility = View.VISIBLE
                 noInternetReconnectButton.visibility = View.VISIBLE
-                homeEmptyLayout.visibility = View.GONE
+                homeEmptyLayout?.visibility = View.GONE
                 mainHomeFloatingActionButton.visibility = View.VISIBLE
             }
         }
@@ -156,8 +156,8 @@ class HomeFragment : MainGenericFragment()
         setUpToolbar()
         if (!NetworkHelper.isConnected) {
             noInternetReconnectButton.visibility = View.VISIBLE
-            homeEmptyLayout.visibility = View.VISIBLE
-            mainHomeRecyclerView.visibility = View.GONE
+            homeEmptyLayout?.visibility = View.VISIBLE
+            mainHomeRecyclerView?.visibility = View.GONE
             mainHomeFloatingActionButton.visibility = View.GONE
             mProgress?.hide()
         } else {
@@ -178,14 +178,14 @@ class HomeFragment : MainGenericFragment()
 
     private fun initViews() {
         mProgress = QuestGenericProgress(context)
-        mainHomeRecyclerView.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
-        mainHomeRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
+        mainHomeRecyclerView?.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        mainHomeRecyclerView?.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)
         mQuestsAdapter =  QuestsArrayAdapter(context, mQuestsList) { item: Quest ->
             startActivity(QuestDetailActivity.getActivityIntent(context, item.id!!))
         }
-        mainHomeRecyclerView.adapter = mQuestsAdapter
+        mainHomeRecyclerView?.adapter = mQuestsAdapter
 
-        mainHomeRecyclerView.setOnClickListener { startActivity(CreateQuestActivity.getActivityIntent(context)) }
+        mainHomeRecyclerView?.setOnClickListener { startActivity(CreateQuestActivity.getActivityIntent(context)) }
         mainHomeFloatingActionButton.setOnClickListener { startActivity(CreateQuestActivity.getActivityIntent(context)) }
 //        noInternetReconnectButton.setOnClickListener {
 //            configureListeners()
