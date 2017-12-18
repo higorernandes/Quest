@@ -35,6 +35,12 @@
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="create_account">Cadastrar</string>
+    <string-array name="schools_array">
+        <item>UFU - Universidade Federal de Uberlândia</item>
+        <item>UFTM - Universidade Federal do Triângulo Mineiro</item>
+        <item>UNITRI - Centro Universitário do Triângulo</item>
+        <item>UNIUBE - Universidade de Uberaba</item>
+    </string-array>
 
     <!-- Forgot Password  -->
     <string name="reset_password_label">Resetar Senha</string>

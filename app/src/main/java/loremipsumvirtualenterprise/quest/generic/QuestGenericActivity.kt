@@ -32,9 +32,8 @@ abstract class QuestGenericActivity : AppCompatActivity()
         var sAvenirNextMedium: Typeface? = null
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         loadFonts()
     }
 
@@ -65,8 +64,7 @@ abstract class QuestGenericActivity : AppCompatActivity()
 
     fun setFontError(s: String): SpannableString {
         val newTitle = SpannableString(s)
-        newTitle.setSpan(CustomTypefaceSpan("", sAvenirNextRegular!!), 0,
-                newTitle.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        newTitle.setSpan(CustomTypefaceSpan("", sAvenirNextRegular!!), 0, newTitle.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
 
         return newTitle
     }
