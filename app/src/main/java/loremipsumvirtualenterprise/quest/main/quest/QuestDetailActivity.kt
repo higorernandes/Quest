@@ -30,6 +30,7 @@ import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 import kotlinx.android.synthetic.main.toolbar_detail.*
 import kotlinx.android.synthetic.main.toolbar_detail.view.*
@@ -182,7 +183,9 @@ class QuestDetailActivity : QuestGenericActivity(), TextWatcher
 
         mainToolbarActionButton.setOnClickListener { confirmDeleteQuest() }
         mainToolbarSecondActionButton.setOnClickListener {
-            //TODO: navigate to edit
+            if (mQuest != null) {
+                startActivity(CreateQuestActivity.getActivityIntentForUpdate(this, mQuest!!.id!!))
+            }
         }
     }
 
