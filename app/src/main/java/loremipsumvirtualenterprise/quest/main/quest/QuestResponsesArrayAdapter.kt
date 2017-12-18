@@ -19,6 +19,7 @@ import loremipsumvirtualenterprise.quest.main.board.QuestsArrayAdapter
 import loremipsumvirtualenterprise.quest.model.Quest
 import loremipsumvirtualenterprise.quest.model.QuestResponse
 import loremipsumvirtualenterprise.quest.model.QuestUser
+import loremipsumvirtualenterprise.quest.util.DateHelper
 import loremipsumvirtualenterprise.quest.util.FirebaseDatabaseUtil
 
 /**
@@ -54,7 +55,7 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
         val questResponse: QuestResponse = mObjects!![position]
         holder?.itemResponseVotesCounter?.text = questResponse.votes.toString()
         holder?.itemQuestResponseText?.text = questResponse.text
-        holder?.itemQuestPublishDate?.text = questResponse.publishedAt
+        holder?.itemQuestPublishDate?.text = DateHelper.formatDate(questResponse.publishedAt)
         loadAuthorForHolder(holder, questResponse)
     }
 
@@ -104,7 +105,7 @@ class QuestResponsesArrayAdapter constructor(context: Context, objects: ArrayLis
 
         init {
             itemResponseAuthorImageView = itemView.findViewById(R.id.itemResponseAuthorImageView)
-            itemResponseUpvoteButton = itemView.findViewById(R.id.itemResponseUpvoteButton)
+            itemResponseUpvoteButton = itemView.findViewById<Button>(R.id.itemResponseUpvoteButton)
             itemResponseDownvoteButton = itemView.findViewById(R.id.itemResponseDownvoteButton)
             itemResponseVotesCounter = itemView.findViewById(R.id.itemResponseVotesCounter)
             itemQuestResponseAuthor = itemView.findViewById(R.id.itemQuestResponseAuthor)

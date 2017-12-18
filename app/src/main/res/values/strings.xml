@@ -60,6 +60,9 @@
     <string name="create_quest_title">Título</string>
     <string name="create_quest_description_label">Descrição</string>
 
+    <!-- Quest detail -->
+    <string name="delete_delete_confirmation">Tem certeza de que deseja excluir a pergunta? Esta operação não pode ser desfeita.</string>
+
     <!-- Settings -->
     <string name="settings_toolbar_title">Configurações</string>
     <string name="settings_account">Minha conta</string>
@@ -87,5 +90,7 @@
     <string name="detail_title">Detalhes</string>
     <string name="detail_no_responses_text">Ainda não há respostas para esta pergunta.</string>
     <string name="update_password_button_text">Atualizar Senha</string>
+    <string name="detail_option_edit">Editar</string>
+    <string name="detail_option_delete">Excluir</string>
 
 </resources>
